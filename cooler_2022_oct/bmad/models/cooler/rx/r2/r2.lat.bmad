@@ -1,0 +1,22 @@
+! end of R1
+BEGINNING[BETA_A] =  25.53135216
+BEGINNING[ALPHA_A] = -2.02221449
+BEGINNING[BETA_B] =  8.27767726
+BEGINNING[ALPHA_B] = 0.80625680
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+beginning[x_position] = -1.97393
+beginning[y_position] = 1.28599
+beginning[z_position] = 58.96659
+
+
+
+call, file = r2.bmad
+
+use, r2
+

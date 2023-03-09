@@ -1,0 +1,26 @@
+!_______________________
+! LA.CRMOD00
+
+LA.CRMOD00.Mar.BEG: Marker
+LA.CRMOD00.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD00.GAT01: instrument, L = 0.1
+LA.CRMOD00.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD00.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD00.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD00.CAV01: LA.CAV
+
+LA.CRMOD00: line = (LA.CRMOD00.Mar.BEG,
+  LA.CRMOD00.GAT01,
+  LA.CRMOD00.PIP01,
+  LA.CRMOD00.CAV01,
+  LA.CRMOD00.PIP02, 
+  LA.CRMOD00.GAT02,
+  LA.CRMOD00.Mar.END)
+  

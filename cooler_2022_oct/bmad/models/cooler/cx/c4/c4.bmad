@@ -1,0 +1,115 @@
+!---------------------
+!---------------------
+! C4
+! Cooling Section 2
+
+
+
+
+!---------------------
+! Geometry
+
+C4.angle0 = 0
+C4.angle1 = -5.02835251470500136E-002 ! makes path length the same as the hadron line
+
+
+
+!---------------------
+! Markers
+
+C4.Mar.BEG: marker
+C4.Mar.MID: marker, superimpose, ref = C4.Pip02
+C4.Mar.END: marker
+
+!---------------------
+! Pipes
+
+
+C4.Pip01: pipe, L = 2.0051438
+C4.Pip02: pipe, L = 1.5
+C4.Pip03: pipe, L = C4.Pip01[L]
+
+
+!---------------------
+! Bends
+
+
+C4.Ben00: sbend, L  = 0.3, fringe_type = full
+
+C4.Ben01: C4.Ben00, angle = C4.angle1 + C4.angle0/2
+C4.Ben02: C4.Ben00, angle = -C4.angle1
+C4.Ben03: C4.Ben00, angle = -C4.angle1
+C4.Ben04: C4.Ben00, angle = C4.angle1 + C4.angle0/2
+
+
+
+!---------------------
+! Quads
+
+C4.Qua00: quad, L = 0.1
+
+C4.Qua01: C4.Qua00, superimpose, ref = C4.Pip01, offset = 0
+C4.Qua02: C4.Qua00, superimpose, ref = C4.Pip02, ref_origin=beginning, offset = 0.2
+C4.Qua03: C4.Qua00, superimpose, ref = C4.Pip02, offset = 0
+C4.Qua04: C4.Qua00, superimpose, ref = C4.Pip02, ref_origin=end, offset = -0.2
+C4.Qua05: C4.Qua00, superimpose, ref = C4.Pip03, offset = 0
+
+
+!C4.QUA01[K1] =  1.71717581802818451E+001
+!C4.QUA02[K1] = -1.56949205139405343E+001
+!C4.QUA03[K1] =  2.59790563757344550E+001
+!C4.Qua04[K1] = C4.Qua02[K1] 
+!C4.Qua05[K1] = C4.Qua01[K1] 
+
+
+!---------------------
+! Overlays
+
+O_C4.Qua01: overlay = {C4.Qua01, C4.Qua05}, k1
+O_C4.Qua02: overlay = {C4.Qua02, C4.Qua04}, k1
+
+
+O_C4.QUA01[K1] =  1.72234871273874930E+001 ! fixes r56
+O_C4.QUA02[K1] = -1.55371001906323176E+001
+C4.QUA03[K1] =  2.76453442542324730E+001
+
+! r56 = 5 mm
+O_C4.QUA01[K1] =  9.43193158108732277E+000
+O_C4.QUA02[K1] = -2.49261294143214407E+001
+C4.QUA03[K1] =  1.37880642039899968E+001
+
+
+
+O_C4.chicane: overlay={
+  C4.Ben01[g]:sin(theta)/Lp, 
+  C4.Ben01[L]:Lp/sinc(theta),
+  C4.Ben01[e2]:theta, 
+
+  C4.Pip01[L]: Lp_drift/cos(theta),
+  C4.Pip03[L]: Lp_drift/cos(theta),
+
+  C4.Ben02[g]:-sin(theta)/Lp, 
+  C4.Ben02[L]:Lp/sinc(theta),
+  C4.Ben02[e1]:-theta,
+
+  C4.Ben03[g]:-sin(theta)/Lp, 
+  C4.Ben03[L]:Lp/sinc(theta),
+  C4.Ben03[e2]:-theta,
+
+  C4.Ben04[g]:sin(theta)/Lp, 
+  C4.Ben04[L]:Lp/sinc(theta),
+  C4.Ben04[e1]:theta}, var = {theta, Lp, Lp_drift}, theta=C4.angle1, Lp=C4.Ben00[L], Lp_drift=C4.Pip01[L]
+
+
+
+
+!---------------------
+! Lines
+
+
+C4: line = (C4.Mar.BEG,
+	C4.Ben01, C4.Pip01,
+	C4.Ben02, C4.Pip02,
+	C4.Ben03, C4.Pip03,
+	C4.Ben04, 
+	C4.Mar.END)

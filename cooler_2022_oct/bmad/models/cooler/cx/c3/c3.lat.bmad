@@ -1,0 +1,23 @@
+BEGINNING[BETA_A] = 0.88912888 
+BEGINNING[ALPHA_A] =0
+BEGINNING[BETA_B] =  0.87968622
+BEGINNING[ALPHA_B] =0
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+
+call, file = c3.bmad
+
+
+call, file = ../c4/c4.bmad
+
+!use, c3
+
+lat: line = (c3, c4)
+
+use, lat
+

@@ -1,0 +1,21 @@
+beginning[beta_a] = 7
+beginning[beta_b] = 7
+beginning[alpha_a] = 0.33887518
+beginning[alpha_b] = 0.33887518
+
+beginning[e_tot] = 5.76e6
+
+parameter[particle] = electron
+
+parameter[geometry] = open
+
+
+call, file = cavity.bmad
+
+p0: pipe, L = 1.0
+
+lat: line = (LA.CAV, p0, LA.CAVH)
+
+use, lat
+
+

@@ -1,0 +1,270 @@
+!_______________________
+! LA.CRMOD01
+
+LA.CRMOD01.Mar.BEG: Marker
+LA.CRMOD01.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD01.GAT01: instrument, L = 0.1
+LA.CRMOD01.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD01.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD01.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD01.CAV01: LA.CAV
+
+LA.CRMOD01: line = (LA.CRMOD01.Mar.BEG,
+  LA.CRMOD01.GAT01,
+  LA.CRMOD01.PIP01,
+  LA.CRMOD01.CAV01,
+  LA.CRMOD01.PIP02, 
+  LA.CRMOD01.GAT02,
+  LA.CRMOD01.Mar.END)
+  
+!_______________________
+! LA.CRMOD02
+
+LA.CRMOD02.Mar.BEG: Marker
+LA.CRMOD02.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD02.GAT01: instrument, L = 0.1
+LA.CRMOD02.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD02.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD02.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD02.CAV01: LA.CAV
+
+LA.CRMOD02: line = (LA.CRMOD02.Mar.BEG,
+  LA.CRMOD02.GAT01,
+  LA.CRMOD02.PIP01,
+  LA.CRMOD02.CAV01,
+  LA.CRMOD02.PIP02, 
+  LA.CRMOD02.GAT02,
+  LA.CRMOD02.Mar.END)
+  
+!_______________________
+! LA.CRMOD03
+
+LA.CRMOD03.Mar.BEG: Marker
+LA.CRMOD03.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD03.GAT01: instrument, L = 0.1
+LA.CRMOD03.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD03.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD03.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD03.CAV01: LA.CAV
+
+LA.CRMOD03: line = (LA.CRMOD03.Mar.BEG,
+  LA.CRMOD03.GAT01,
+  LA.CRMOD03.PIP01,
+  LA.CRMOD03.CAV01,
+  LA.CRMOD03.PIP02, 
+  LA.CRMOD03.GAT02,
+  LA.CRMOD03.Mar.END)
+  
+!_______________________
+! LA.CRMOD04
+
+LA.CRMOD04.Mar.BEG: Marker
+LA.CRMOD04.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD04.GAT01: instrument, L = 0.1
+LA.CRMOD04.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD04.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD04.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD04.CAV01: LA.CAV
+
+LA.CRMOD04: line = (LA.CRMOD04.Mar.BEG,
+  LA.CRMOD04.GAT01,
+  LA.CRMOD04.PIP01,
+  LA.CRMOD04.CAV01,
+  LA.CRMOD04.PIP02, 
+  LA.CRMOD04.GAT02,
+  LA.CRMOD04.Mar.END)
+  
+!_______________________
+! LA.CRMOD07
+
+LA.CRMOD07.Mar.BEG: Marker
+LA.CRMOD07.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD07.GAT01: instrument, L = 0.1
+LA.CRMOD07.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD07.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD07.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD07.CAV01: LA.CAV
+
+LA.CRMOD07: line = (LA.CRMOD07.Mar.BEG,
+  LA.CRMOD07.GAT01,
+  LA.CRMOD07.PIP01,
+  LA.CRMOD07.CAV01,
+  LA.CRMOD07.PIP02, 
+  LA.CRMOD07.GAT02,
+  LA.CRMOD07.Mar.END)
+  
+!_______________________
+! LA.CRMOD08
+
+LA.CRMOD08.Mar.BEG: Marker
+LA.CRMOD08.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD08.GAT01: instrument, L = 0.1
+LA.CRMOD08.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD08.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD08.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD08.CAV01: LA.CAV
+
+LA.CRMOD08: line = (LA.CRMOD08.Mar.BEG,
+  LA.CRMOD08.GAT01,
+  LA.CRMOD08.PIP01,
+  LA.CRMOD08.CAV01,
+  LA.CRMOD08.PIP02, 
+  LA.CRMOD08.GAT02,
+  LA.CRMOD08.Mar.END)
+  
+!_______________________
+! LA.CRMOD09
+
+LA.CRMOD09.Mar.BEG: Marker
+LA.CRMOD09.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD09.GAT01: instrument, L = 0.1
+LA.CRMOD09.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD09.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD09.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD09.CAV01: LA.CAV
+
+LA.CRMOD09: line = (LA.CRMOD09.Mar.BEG,
+  LA.CRMOD09.GAT01,
+  LA.CRMOD09.PIP01,
+  LA.CRMOD09.CAV01,
+  LA.CRMOD09.PIP02, 
+  LA.CRMOD09.GAT02,
+  LA.CRMOD09.Mar.END)
+  
+!_______________________
+! LA.CRMOD10
+
+LA.CRMOD10.Mar.BEG: Marker
+LA.CRMOD10.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD10.GAT01: instrument, L = 0.1
+LA.CRMOD10.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD10.PIP01: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+LA.CRMOD10.PIP02: pipe, L = (5.2285 - LA.CAV[L] - 2*0.1 )/2
+
+! Cavities
+
+LA.CRMOD10.CAV01: LA.CAV
+
+LA.CRMOD10: line = (LA.CRMOD10.Mar.BEG,
+  LA.CRMOD10.GAT01,
+  LA.CRMOD10.PIP01,
+  LA.CRMOD10.CAV01,
+  LA.CRMOD10.PIP02, 
+  LA.CRMOD10.GAT02,
+  LA.CRMOD10.Mar.END)
+  
+!_______________________
+! LA.CRMOD05
+
+LA.CRMOD05.Mar.BEG: Marker
+LA.CRMOD05.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD05.GAT01: instrument, L = 0.1
+LA.CRMOD05.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD05.PIP01: pipe, L = (3.0 - LA.CAVH[L] - 2*0.1 - (1.0) )/2
+LA.CRMOD05.PIP02: pipe, L = 1.0 - LA.CAVH[L]
+LA.CRMOD05.PIP03: pipe, L = (3.0 - LA.CAVH[L] - 2*0.1 - (1.0) )/2
+
+! Cavities
+
+LA.CRMOD05.CAV01: LA.CAVH
+LA.CRMOD05.CAV02: LA.CAVH
+
+
+LA.CRMOD05: line = (LA.CRMOD05.Mar.BEG,
+  LA.CRMOD05.GAT01,
+  LA.CRMOD05.PIP01,
+  LA.CRMOD05.CAV01,
+  LA.CRMOD05.PIP02,
+  LA.CRMOD05.CAV02,
+  LA.CRMOD05.PIP03,  
+  LA.CRMOD05.GAT02,
+  LA.CRMOD05.Mar.END)
+  
+!_______________________
+! LA.CRMOD06
+
+LA.CRMOD06.Mar.BEG: Marker
+LA.CRMOD06.Mar.END: Marker
+
+! Gate valves
+LA.CRMOD06.GAT01: instrument, L = 0.1
+LA.CRMOD06.GAT02: instrument, L = 0.1
+
+! Pipes
+LA.CRMOD06.PIP01: pipe, L = (3.0 - LA.CAVH[L] - 2*0.1 - (1.0) )/2
+LA.CRMOD06.PIP02: pipe, L = 1.0 - LA.CAVH[L]
+LA.CRMOD06.PIP03: pipe, L = (3.0 - LA.CAVH[L] - 2*0.1 - (1.0) )/2
+
+! Cavities
+
+LA.CRMOD06.CAV01: LA.CAVH
+LA.CRMOD06.CAV02: LA.CAVH
+
+
+LA.CRMOD06: line = (LA.CRMOD06.Mar.BEG,
+  LA.CRMOD06.GAT01,
+  LA.CRMOD06.PIP01,
+  LA.CRMOD06.CAV01,
+  LA.CRMOD06.PIP02,
+  LA.CRMOD06.CAV02,
+  LA.CRMOD06.PIP03,  
+  LA.CRMOD06.GAT02,
+  LA.CRMOD06.Mar.END)
+  

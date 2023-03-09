@@ -1,0 +1,100 @@
+
+
+!---------------------
+! Dependencies 
+
+call, file = triplet/triplet2.bmad
+
+
+!---------------------
+! Markers
+CX.Mar.BEG: marker
+CX.Mar.MID: marker
+
+CX.Mar.KMID: marker
+CX.Mar.KEND: marker
+
+CX.Mar.ETA0: marker
+
+
+
+!---------------------
+! Geometry
+
+
+CX.angle0 =  3.21848730799674174E-002
+
+!---------------------
+! Pipes
+
+
+CX.Pip01: pipe, L = 94.090599 -  78.244962
+CX.Pip02: pipe, L = 10
+
+CX.Pip03: pipe, L = 3
+CX.Pip04: pipe, L = 1
+CX.PIP04[L] =  3.64859577412113323E+000
+
+!---------------------
+! Bends
+
+CX.Ben00: sbend, fringe_type = full, L = 0.1
+
+CX.Ben01: CX.Ben00, angle = Cx.angle0/2
+CX.Ben02: CX.Ben00, angle = Cx.angle0/2
+
+
+
+
+!---------------------
+! Quads
+CX.Qua00: quad, L = 0.06
+
+
+CX.Qua01: CX.Qua00, superimpose, ref = CX.Pip01, ref_origin=end, offset = -2
+CX.Qua02: CX.Qua00, superimpose, ref = CX.Pip01, ref_origin=end, offset = -1
+
+CX.Qua03: CX.Qua00, superimpose, ref = CX.Pip02
+
+CX.Qua04: CX.Qua00, superimpose, ref = CX.Pip03, ref_origin=beginning, offset = 0.5
+CX.Qua05: CX.Qua00, superimpose, ref = CX.Pip03, ref_origin=beginning, offset = 1.5
+
+CX.QUA03[K1] =  6.62689857218647127E+000
+
+CX.QUA01[K1] =  9.05156793478277777E+000
+CX.QUA02[K1] = -8.11365561941559044E+000
+CX.QUA04[K1] = -1.13333453532457220E+001
+CX.QUA05[K1] =  1.56651844178119628E+001
+
+
+!---------------------
+! Lines
+
+cx_half: line = (
+!CX.Mar.KMID, 
+CX.Pip01,
+! CX.Mar.KEND,
+    CX.Ben01, CX.Pip02, 
+    CX.Ben02,
+    ! CX.Mar.ETA0,
+    CX.Pip03,
+    30*triplet2,
+    CX.Pip04)
+    !CX.Mar.MID)
+
+
+
+
+
+call, file = c1.bmad
+
+
+
+
+!lat: line = (CX.Mar.KMID, 
+!CX.Pip01, CX.Mar.KEND,
+!    CX.Ben01, 
+!    40*triplet2)
+!
+!use, lat
+

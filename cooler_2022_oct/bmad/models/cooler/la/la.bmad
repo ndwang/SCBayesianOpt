@@ -1,0 +1,110 @@
+
+
+!_______________________
+! Cavities
+
+
+
+call, file = cavity/cavity.bmad
+call, file = crmod/la.crmods.bmad
+
+
+LA.mar.BEG: Marker
+LA.mar.END: Marker
+
+LA.Mar.MID: marker, superimpose, ref = LA.CRMOD06.mar.end
+
+LA.match: match, match_end=True,
+beta_a1 = 10, 
+beta_b1 = 10, 
+alpha_a1 = 1, 
+alpha_b1 = 1
+
+!_______________________
+! Pipes
+
+LA.Pip00: pipe, L = 1
+LA.Pip01: LA.Pip00
+LA.Pip02: LA.Pip00
+LA.Pip03: LA.Pip00
+LA.Pip04: LA.Pip00
+
+!_______________________
+! Quads
+
+LA.Qua00: quadrupole, L = 0.2
+LA.Qua01: LA.Qua00, superimpose, ref = LA.Pip01, offset=0.1, ref_origin=beginning, ele_origin=beginning
+LA.Qua03: LA.Qua00, superimpose, ref = LA.Pip02, offset=0.1, ref_origin=beginning, ele_origin=beginning
+LA.Qua05: LA.Qua00, superimpose, ref = LA.Pip03, offset=0.1, ref_origin=beginning, ele_origin=beginning
+LA.Qua07: LA.Qua00, superimpose, ref = LA.Pip04, offset=0.1, ref_origin=beginning, ele_origin=beginning
+
+LA.Qua02: LA.Qua00, superimpose, ref = LA.Pip01, offset=-0.1, ref_origin=end, ele_origin=end
+LA.Qua04: LA.Qua00, superimpose, ref = LA.Pip02, offset=-0.1, ref_origin=end, ele_origin=end
+LA.Qua06: LA.Qua00, superimpose, ref = LA.Pip03, offset=-0.1, ref_origin=end, ele_origin=end
+LA.Qua08: LA.Qua00, superimpose, ref = LA.Pip04, offset=-0.1, ref_origin=end, ele_origin=end
+
+!_______________________
+! Overlays
+O_LA: overlay = {
+    LA.CRMOD01.CAV01[phi0]:phase_deg/360,
+    LA.CRMOD02.CAV01[phi0]:phase_deg/360,
+    LA.CRMOD03.CAV01[phi0]:phase_deg/360,
+    LA.CRMOD04.CAV01[phi0]:phase_deg/360,
+
+    LA.CRMOD05.CAV01[phi0]:phase3_deg/360,
+    LA.CRMOD05.CAV02[phi0]:phase3_deg/360,
+    LA.CRMOD06.CAV01[phi0]:phase3_deg/360,
+    LA.CRMOD06.CAV02[phi0]:phase3_deg/360,    
+
+    LA.CRMOD07.CAV01[phi0]:phase_deg/360,
+    LA.CRMOD08.CAV01[phi0]:phase_deg/360,
+    LA.CRMOD09.CAV01[phi0]:phase_deg/360,
+    LA.CRMOD10.CAV01[phi0]:phase_deg/360,
+    
+    LA.CRMOD01.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    LA.CRMOD02.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    LA.CRMOD03.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    LA.CRMOD04.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    
+    LA.CRMOD05.CAV01[voltage]:voltage3/4,
+    LA.CRMOD05.CAV02[voltage]:voltage3/4,
+    LA.CRMOD06.CAV01[voltage]:voltage3/4,
+    LA.CRMOD06.CAV02[voltage]:voltage3/4,    
+    
+    LA.CRMOD07.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    LA.CRMOD08.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    LA.CRMOD09.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180)),
+    LA.CRMOD10.CAV01[voltage]:(voltage + voltage3)/8/abs(cos(phase_deg*pi/180))}, var = {phase_deg, voltage, voltage3, phase3_deg}, 
+phase_deg = 0, voltage = (150e6-6e6), voltage3 = (150e6-6e6)/9, phase3_deg = 180
+
+
+
+LA: line = (LA.mar.BEG,
+LA.CRMOD01, LA.Pip01, 
+LA.CRMOD02, LA.CRMOD03, LA.Pip02, 
+LA.CRMOD04,
+LA.CRMOD05, LA.CRMOD06, 
+LA.CRMOD07, LA.Pip03, 
+LA.CRMOD08, LA.CRMOD09, LA.Pip04, 
+LA.CRMOD10,
+LA.mar.END)
+
+la_multi: line[multipass] = (la)
+
+O_LA_Q1: overlay = {LA.QUA01 , LA.QUA08}, b1_gradient = 0
+O_LA_Q2: overlay = {LA.QUA02 , LA.QUA07}, b1_gradient = 0
+O_LA_Q3: overlay = {LA.QUA03 , LA.QUA06}, b1_gradient = 0
+O_LA_Q4: overlay = {LA.QUA04 , LA.QUA05}, b1_gradient = 0
+
+LA_cell1: line = (LA.Mar.BEG, LA.CRMOD01,  LA.Mar.END)
+
+
+
+
+
+
+
+
+
+
+

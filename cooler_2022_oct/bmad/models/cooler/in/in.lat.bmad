@@ -1,0 +1,19 @@
+
+
+beginning[beta_a] = 10
+
+beginning[beta_b] = 10
+
+parameter[particle] = electron
+
+!beginning[e_tot] = 1e6
+beginning[p0c] = 0
+parameter[geometry] = open
+
+call, file = in.bmad
+
+! Faster
+!LCAVITY::IN.*[tracking_method] = bmad_standard
+!LCAVITY::IN.*[mat6_calc_method] = bmad_standard
+
+use, in

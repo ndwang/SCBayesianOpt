@@ -1,0 +1,45 @@
+!Matches into Hadron line @Mar.kick1
+BEGINNING[X_POSITION] =  -1.61676591646786E+00
+BEGINNING[Z_POSITION] =   1.00515188201917E+02
+BEGINNING[THETA_POSITION] =   3.36474432315656E+00
+
+BEGINNING[BETA_A]  = 10
+BEGINNING[ALPHA_A] = 0
+BEGINNING[BETA_B]  = 10
+BEGINNING[ALPHA_B] = 0
+
+! Twiss at TA.Mar.Beg (reversed)
+BEGINNING[BETA_A]  =    10.63639299   
+BEGINNING[ALPHA_A] =    -0.83598012   * -1
+BEGINNING[BETA_B]  =      19.91179674
+BEGINNING[ALPHA_B] =      34.30271027 * -1
+
+
+
+
+
+! Will match to C7
+! BEGINNING[BETA_A] =  1.10000000000000000E+002
+! BEGINNING[ALPHA_A] =  9.27035628883472995E+000
+! BEGINNING[BETA_B] =  1.10000000000000000E+002
+! BEGINNING[ALPHA_B] =  1.06621571578170098E+001
+
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+!call, file = beginning.bmad
+
+call, file = hd.bmad
+
+call, file = ../cx/c7/c7.bmad
+
+
+! Note: should be reversed in main lattice
+lat: line = (HD, c7)
+
+use, lat
+

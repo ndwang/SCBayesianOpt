@@ -1,0 +1,73 @@
+
+
+
+
+kx_angle = 0.04435
+
+L_modulator = 40
+
+
+
+!---------------------
+! TA
+call, file = ta/ta.bmad
+
+!---------------------
+! HM
+call, file = hm/hm.bmad
+
+
+!---------------------
+! HD
+call, file = hd/hd.bmad
+
+!---------------------
+! RX
+!call, file = rl/rl.bmad
+call, file = rx/r1/r1.bmad
+call, file = rx/r2/r2.bmad
+call, file = rx/r3/r3.bmad
+call, file = rx/r4/r4.bmad
+rx_full: line = (r1, r2, r3, r4)
+
+!---------------------
+! CX
+call, file = cx/c1/c1.bmad
+call, file = cx/c2/c2.bmad
+call, file = cx/c3/c3.bmad
+call, file = cx/c4/c4.bmad
+call, file = cx/c6/c6.bmad
+call, file = cx/c7/c7.bmad
+cx_full: line = (c1, c2, c3, c4, -c3, -c6, -c7)
+
+
+
+!---------------------
+! TB
+call, file = tb/tb.bmad
+
+
+!---------------------
+! MH
+call, file = mh/mh.bmad
+
+
+
+mar.beg: marker
+mar.end: marker
+
+
+
+skeleton: line = (mar.beg,
+hm,
+cx_full,
+-hd,
+ta, 
+rx_full,
+tb,
+mh,
+mar.end)
+
+
+
+

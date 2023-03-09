@@ -1,0 +1,80 @@
+
+IN.GUN: e_gun, L = 0.15,
+    field_calc = fieldmap, tracking_method = time_runge_kutta, mat6_calc_method=tracking,
+    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/Cornell_dcgun_fieldmesh.h5,
+    autoscale_phase = F
+    !superimpose, ref=beginning, ele_origin=beginning, offset = 0 
+    
+IN.GUN[grid_field(1)%master_parameter] = VOLTAGE    
+    
+IN.SOL01: solenoid, L = 0.6,
+    field_calc = fieldmap, tracking_method = runge_kutta, mat6_calc_method=tracking,
+    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/Cornell_L0_solenoid_fieldmesh.h5,
+    grid_field(1)%master_parameter=bs_field,
+    wrap_superimpose = False,
+    superimpose, ref=beginning, ele_origin=center, offset = 0.33,
+    
+    bs_field = 0.033786966247 
+    
+IN.CAV01: lcavity, L = 0.5,
+    rf_frequency = 197000000.0,
+    field_calc = fieldmap, tracking_method = runge_kutta, mat6_calc_method=tracking,
+    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/BNL_QWC_197MHz_fieldmesh.h5,
+    superimpose, ref=beginning, ele_origin=beginning, offset = 0.641,
+    voltage = 264669.76977,
+    phi0 = -0.2534080556354224
+    
+IN.SOL02: solenoid, L = 0.6,
+    field_calc = fieldmap, tracking_method = runge_kutta, mat6_calc_method=tracking,
+    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/Cornell_L0_solenoid_fieldmesh.h5,
+    grid_field(1)%master_parameter=bs_field,
+    wrap_superimpose = False,
+    superimpose, ref=beginning, ele_origin=center, offset = 1.596014651,
+    
+    bs_field = 0.031375172971 
+    
+IN.CAV02: lcavity, L = 0.9495,
+    rf_frequency = 591000000.0,
+    field_calc = fieldmap, tracking_method = runge_kutta, mat6_calc_method=tracking,
+    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/BNL_591MHz_2cell_fieldmesh.h5,
+    superimpose, ref=beginning, ele_origin=beginning, offset = 2.1634801141,
+    voltage = 6087509.9443118535,
+    phi0 = -0.022516065720845704
+    ! missing fieldmap 1774_2cell.gdf
+IN.SOL03: solenoid, L = 0.8,
+    field_calc = fieldmap, tracking_method = runge_kutta, mat6_calc_method=tracking,
+    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/Cornell_L0_solenoid_fieldmesh.h5,
+    grid_field(1)%master_parameter=bs_field,
+    wrap_superimpose = False,
+    superimpose, ref=beginning, ele_origin=center, offset = 6.0574818146,
+    
+    bs_field = 0.086240424660928 
+    
+
+IN.Mar.BEG: marker
+IN.Mar.END: marker
+
+IN.gun[voltage] = 400e3
+
+IN.Pip01: drift, L = 8 - 0.15
+
+IN.CAV03:Lcavity, L = c_light/ 1773e6/2, n_cell = 1, rf_frequency = 1773e6,
+   mat6_calc_method = Tracking, tracking_method = Runge_Kutta,
+    longitudinal=0,
+    superimpose, offset = 4.0
+
+IN.CAV03[phi0] = 0.5
+IN.CAV03[voltage] = 1e6 
+
+
+
+!IN.CAV02[voltage] = 7e6 - m_electron - IN.gun[voltage] + (6e6 - 5.9546407E+06 )
+
+! Makes 6 MeV exactly
+IN.CAV02[VOLTAGE] =  6.15617176579251140E+006 
+
+in: line = (IN.Mar.BEG,
+    IN.Gun, IN.Pip01,
+    IN.Mar.END)
+
+

@@ -1,0 +1,156 @@
+!---------------------
+!---------------------
+! C2
+! Cooling Section 2
+
+
+
+
+!---------------------
+! Geometry
+
+C2.angle0 = -3.21848730799674174E-002 ! Angle to make the shortest path
+C2.angle1 = -3 * pi/180   ! Additional demerge angle
+
+
+C2.L1 = 2.5
+
+!---------------------
+! Markers
+
+C2.Mar.BEG: marker
+C2.Mar.MID: marker, superimpose, ref = C2.Pip02
+C2.Mar.END: marker
+
+!---------------------
+! Pipes
+
+
+C2.Pip00: pipe
+
+C2.Pip01: C2.Pip00, L = C2.L1 
+C2.Pip02: C2.Pip00, L = 3
+C2.Pip03: C2.Pip00, L = C2.L1 
+C2.Pip04: C2.Pip00, L = 3
+
+! Makes path length correct
+C2.PIP04[L] =  2.84851742870933888E+000 
+
+!---------------------
+! Bends
+
+
+C2.Ben00: sbend, L  = 0.3, fringe_type = full
+
+C2.Ben01: C2.Ben00, angle = C2.angle0 + C2.angle1
+C2.Ben02: C2.Ben00, angle = -C2.angle1
+C2.Ben03: C2.Ben00, angle = C2.angle1
+C2.Ben04: C2.Ben00, angle = -C2.angle1 ! - C2.angle0 ! test
+
+
+
+!---------------------
+! Quads
+
+C2.Qua00: quad, L = 0.1
+
+C2.Qua01: C2.Qua00, superimpose, ref = C2.Pip01, offset = -C2.L1/4
+C2.Qua02: C2.Qua00, superimpose, ref = C2.Pip01, offset = 0
+C2.Qua03: C2.Qua00, superimpose, ref = C2.Pip01, offset = C2.L1/4
+
+C2.Qua04: C2.Qua00, superimpose, ref = C2.Pip02, offset = -1
+C2.Qua05: C2.Qua00, superimpose, ref = C2.Pip02, offset = 0
+C2.Qua06: C2.Qua00, superimpose, ref = C2.Pip02, offset = 1
+
+C2.Qua07: C2.Qua00, superimpose, ref = C2.Pip03, offset = -C2.L1/4
+C2.Qua08: C2.Qua00, superimpose, ref = C2.Pip03, offset = 0
+C2.Qua09: C2.Qua00, superimpose, ref = C2.Pip03, offset = C2.L1/4
+
+C2.Qua10: C2.Qua00, superimpose, ref = C2.Pip04, ref_origin = beginning, ele_origin=beginning, offset = 0.1
+C2.Qua11: C2.Qua00, superimpose, ref = C2.Pip04, offset = 0
+C2.Qua12: C2.Qua00, superimpose, ref = C2.Pip04, ref_origin = end, ele_origin=end, offset = -0.1
+
+
+
+C2.QUA01[K1] =  2.85548310761121975E+001
+C2.QUA02[K1] = -2.54848320556326513E+001
+C2.QUA03[K1] =  3.33731967012168411E+001
+C2.QUA04[K1] = -1.00599937182369743E+001
+C2.QUA05[K1] =  1.29712273457927978E+001
+C2.QUA06[K1] = -7.32928044205703344E+000
+C2.QUA07[K1] =  3.03843407149138969E+001
+C2.QUA08[K1] = -2.04050181809062146E+001
+C2.QUA09[K1] =  3.03843407149139075E+001
+C2.QUA10[K1] = -1.23477751484046667E+001
+C2.QUA11[K1] =  1.29298483467173391E+001
+C2.QUA12[K1] = -2.07451681821579399E+001
+
+!
+C2.QUA01[K1] =  2.86420943586671655E+001
+C2.QUA02[K1] = -2.18641458988387605E+001
+C2.QUA03[K1] =  3.46116054420331380E+001
+C2.QUA04[K1] = -8.79795786366612198E+000
+C2.QUA05[K1] =  1.31701274860175754E+001
+C2.QUA06[K1] = -5.07914014795352120E+000
+C2.QUA07[K1] =  3.14408708218115045E+001
+C2.QUA08[K1] = -2.03645381978510116E+001
+C2.QUA09[K1] =  2.90999308386318987E+001
+C2.QUA10[K1] = -1.08998710676041863E+001
+C2.QUA11[K1] =  1.24967579547040817E+001
+C2.QUA12[K1] = -2.60259135076364565E+001
+
+C2.QUA10[K1] = -1.19065984616477181E+001
+C2.QUA11[K1] =  1.14435877334007454E+001
+C2.QUA12[K1] = -1.15074477699460012E+001
+
+
+! symmetric first hal
+C2.QUA01[K1] =  1.43500985185206904E+001
+C2.QUA02[K1] =  4.33739975596584859E+000
+C2.QUA03[K1] = -1.33423484060984912E+001
+C2.QUA04[K1] =  1.00662628287799660E+000
+C2.QUA05[K1] =  3.20374440936708682E+000
+C2.QUA06[K1] = C2.QUA04[K1] 
+C2.QUA07[K1] = C2.QUA03[K1] 
+C2.QUA08[K1] = C2.QUA02[K1] 
+C2.QUA09[K1] = C2.QUA01[K1] 
+
+
+! non-symmatric r56=5 mm
+C2.QUA01[K1] =  9.47740836249283447E+000
+C2.QUA02[K1] =  4.93573268260302012E+000
+C2.QUA03[K1] = -1.09133703999194598E+001
+C2.QUA04[K1] =  1.06019648279369316E+000
+C2.QUA05[K1] =  3.57737798785055139E+000
+C2.QUA06[K1] =  4.84847762264694548E+000
+C2.QUA07[K1] = -1.09877631208574815E+001
+C2.QUA08[K1] =  3.37326045660666995E+000
+C2.QUA09[K1] =  1.98076086415380601E+001
+C2.QUA10[K1] = -1.17433411862717403E+001
+C2.QUA11[K1] =  1.21174052566526704E+001
+C2.QUA12[K1] = -1.45354994581745753E+001
+
+!---------------------
+! Overlays
+
+!O_C2.Qua01: overlay = {C2.Qua01, C2.Qua05}, k1
+!O_C2.Qua02: overlay = {C2.Qua02, C2.Qua04}, k1
+
+!O_C2.QUA01[K1] =  1.71652755917037929E+001
+!O_C2.QUA02[K1] = -1.59921763483422179E+001
+!C2.QUA03[K1] =  2.79920156551921302E+001
+
+!O_C2.QUA01[K1] =  1.71652755917038000E+001 ! fixes r56
+!O_C2.QUA02[K1] = -1.47366255124567385E+001
+!C2.QUA03[K1] =  2.77815583092579956E+001
+
+!---------------------
+! Lines
+
+
+C2: line = (C2.Mar.BEG,
+	C2.Ben01, C2.Pip01,
+	C2.Ben02, C2.Pip02,
+	C2.Ben03, C2.Pip03,
+	C2.Ben04, C2.Pip04,
+	C2.Mar.END)

@@ -1,0 +1,76 @@
+!---------------------
+!---------------------
+! R2
+! Return Line segment 2
+
+
+
+!---------------------
+! Markers
+
+R2.Mar.BEG: marker
+R2.Mar.MID: marker, superimpose, ref=R2.Pip02
+R2.Mar.END: marker
+
+
+!---------------------
+! Geometry
+
+R2.Pip02.L = 8
+
+
+!---------------------
+! Pipes
+
+R2.Pip00: pipe
+
+R2.Pip01: R2.Pip00, L = 2
+R2.Pip02: R2.Pip00, L = R2.Pip02.L
+!R2.Pip03: R2.Pip00, L = 2
+
+
+!---------------------
+! Bends
+
+R2.Ben00: sbend, L = 0.3, fringe_type = full
+
+R2.Ben01: R2.Ben00, angle = -20*pi/180
+R2.Ben02: R2.Ben00, angle = 18.4*pi/180
+
+
+!---------------------
+! Quads
+
+R2.Qua00: quad, L = 0.1
+
+R2.Qua01: R2.Qua00, superimpose, ref=R2.Pip01, ref_origin=beginning, ele_origin=beginning, offset=0.1
+R2.Qua02: R2.Qua00, superimpose, ref=R2.Pip01, ref_origin=end, ele_origin=end, offset=-0.1
+
+R2.Qua03: R2.Qua00, superimpose, ref=R2.Pip02, ref_origin=beginning, ele_origin=beginning, offset=0.25*R2.Pip02[L]
+R2.Qua04: R2.Qua00, superimpose, ref=R2.Pip02
+R2.Qua05: R2.Qua00, superimpose, ref=R2.Pip02, ref_origin=end, ele_origin=end, offset=-0.25*R2.Pip02[L]
+
+!R2.Qua06: R2.Qua00, superimpose, ref=R2.Pip03, ref_origin=beginning, ele_origin=beginning, offset=0.1
+!R2.Qua07: R2.Qua00, superimpose, ref=R2.Pip03, ref_origin=end, ele_origin=end, offset=-0.1
+
+
+R2.QUA01[K1] =  5.96787581953454271E+000
+R2.QUA02[K1] = -5.79820070839356827E+000
+R2.QUA03[K1] =  9.69132724001424783E+000
+R2.QUA04[K1] = -4.90441961215530675E+000
+R2.QUA05[K1] =  9.97941000241687703E+000
+
+!R2.QUA06[K1] = R2.QUA02[K1]
+!R2.QUA07[K1] = R2.QUA01[K1]
+
+
+!---------------------
+! Lines
+
+R2: line = (R2.Mar.BEG,
+    R2.Pip01,
+	R2.Ben01,
+	R2.Pip02,
+    R2.Ben02,
+!   R2.Pip03,
+    R2.Mar.END)

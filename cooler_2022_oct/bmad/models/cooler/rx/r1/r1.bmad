@@ -1,0 +1,83 @@
+!---------------------
+!---------------------
+! R1
+! Return Line segment 1
+
+
+!---------------------
+! Markers
+
+R1.Mar.BEG: marker
+R1.Mar.BEGF: marker
+R1.Mar.ENDF: marker
+R1.Mar.END: marker
+
+
+!---------------------
+! Geometry
+R1.Ltot = 176
+
+!---------------------
+! Fodo
+
+R1.Nfodo = 8
+R1.Lfodo = 20
+
+Lq = 0.1
+
+fodo01.Pip01: pipe, L = (R1.Lfodo-2*Lq)/2
+
+fodo01.Qua01: quad, L=Lq
+fodo01.Qua02: quad, L=Lq
+
+
+! Optimal for round beam (90 deg phase advance):
+k1_optimal =  (1/Lq) * 2*sqrt(2) / R1.Lfodo
+
+
+qfodo1: overlay = {fodo01.Qua01[k1]:k1, fodo01.Qua02[k1]:-k1}, var = {k1}, k1 = k1_optimal
+
+R1.fodo: line = (fodo01.Pip01, fodo01.Qua01, fodo01.Pip01, fodo01.Qua02)
+
+
+!---------------------
+! Pipes
+
+R1.Pip00: pipe
+
+R1.Pip01: R1.Pip00, L = (R1.Ltot-R1.Nfodo*R1.Lfodo)/2
+R1.Pip02: R1.Pip00, L = R1.Pip01[L]
+
+
+
+!---------------------
+! Quads
+
+R1.Qua00: quad, L = 0.1
+
+R1.Qua01: R1.Qua00, superimpose, ref=R1.Pip01, ref_origin=beginning, ele_origin=beginning, offset=0.1
+R1.Qua02: R1.Qua00, superimpose, ref=R1.Pip01, ref_origin=beginning, ele_origin=beginning, offset=0.5
+
+R1.Qua03: R1.Qua00, superimpose, ref=R1.Pip01, ref_origin=beginning, ele_origin=beginning, offset=3
+
+R1.Qua04: R1.Qua00, superimpose, ref=R1.Pip01, ref_origin=end, ele_origin=end, offset=-2
+R1.Qua05: R1.Qua00, superimpose, ref=R1.Pip01, ref_origin=end, ele_origin=end
+
+
+R1.QUA01[K1] = -2.30048793534358609E+001
+R1.QUA02[K1] =  1.43573122977956142E+001
+R1.QUA03[K1] = -5.31962494554558329E+000
+R1.QUA04[K1] =  3.57733315104636818E+000
+R1.QUA05[K1] = -4.99819286327735579E+000
+
+!---------------------
+! Lines
+
+
+R1: line = (R1.Mar.BEG,
+    R1.Pip01,
+	R1.Mar.BEGF,
+    8*R1.fodo,
+	R1.Mar.ENDF,
+    R1.Pip02,
+    R1.Mar.END)

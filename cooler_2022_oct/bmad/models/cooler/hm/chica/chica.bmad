@@ -1,0 +1,115 @@
+
+
+hm_theta_default = -30 * pi/180  !full chicane bend angle (rad)
+hm_Lp_bend_default = 0.3
+hm_Lp_drift_default = 1
+
+
+
+!------------
+! Bends
+
+
+HM.chica.Ben: sbend, L = 0.3, FRINGE_TYPE= Full
+HM.chica.Ben01: HM.chica.Ben
+HM.chica.Ben02: HM.chica.Ben
+HM.chica.Ben03: HM.chica.Ben
+HM.chica.Ben04: HM.chica.Ben
+
+
+!------------
+! Quads
+HM.chica.Qua00: quad, L = 0.06
+
+
+HM.chica.Qua01: HM.chica.Qua00, superimpose, ref = HM.chica.pip01, ref_origin=beginning, ele_origin=beginning
+HM.chica.Qua02: HM.chica.Qua00, superimpose, ref = HM.chica.pip01, ref_origin=end, ele_origin=end, offset=-0.1
+
+HM.chica.Qua03: HM.chica.Qua00, superimpose, ref = HM.chica.pip05, ref_origin=beginning, ele_origin=beginning, offset = 0.1
+HM.chica.Qua04: HM.chica.Qua00, superimpose, ref = HM.chica.pip05, ref_origin=end, ele_origin=end, offset=-0.1
+
+
+
+!------------
+! Pipes
+
+HM.chica.pip: pipe
+HM.chica.pip01: HM.chica.pip, L = 3
+HM.chica.pip02: HM.chica.pip, L = 1
+HM.chica.pip03: HM.chica.pip, L = 1
+HM.chica.pip04: HM.chica.pip, L = 1
+HM.chica.pip05: HM.chica.pip, L = 7
+
+!------------
+! Markers
+HM.chica.mar.beg: marker
+HM.chica.mar.mid: marker, superimpose, ref = HM.chica.pip03
+HM.chica.mar.end: marker
+
+
+!------------
+! Lines
+
+HM.chica: line = (HM.chica.mar.beg,
+HM.chica.pip01, 
+HM.chica.ben01, HM.chica.pip02,
+HM.chica.ben02, HM.chica.pip03,
+HM.chica.ben03, HM.chica.pip04,
+HM.chica.ben04, HM.chica.pip05,
+HM.chica.mar.end)
+
+
+! Overlays for rectangular bends
+!
+! Lp : total projected length of the bend
+! theta: total angle in radians
+
+
+O_HM.chica.ben01: overlay = {
+  HM.chica.ben01[g]:sin(theta)/Lp, 
+  HM.chica.ben01[L]:Lp/sinc(theta),
+  HM.chica.ben01[e2]:theta}, 
+  var = {Lp, theta},
+  theta = hm_theta_default,
+  Lp = hm_Lp_bend_default
+
+O_HM.chica.ben02: overlay = {
+  HM.chica.ben02[g]:sin(theta)/Lp, 
+  HM.chica.ben02[L]:Lp/sinc(theta),
+  HM.chica.ben02[e1]:theta}, 
+  var = {Lp, theta},
+  theta = -hm_theta_default,
+  Lp = hm_Lp_bend_default
+
+O_HM.chica.ben03: overlay = {
+  HM.chica.ben03[g]:sin(theta)/Lp, 
+  HM.chica.ben03[L]:Lp/sinc(theta),
+  HM.chica.ben03[e2]:theta}, 
+  var = {Lp, theta},
+  theta = -hm_theta_default,
+  Lp = hm_Lp_bend_default
+
+O_HM.chica.ben04: overlay = {
+  HM.chica.ben04[g]:sin(theta)/Lp, 
+  HM.chica.ben04[L]:Lp/sinc(theta),
+  HM.chica.ben04[e1]:theta}, 
+  var = {Lp, theta},
+  theta = hm_theta_default,
+  Lp = hm_Lp_bend_default
+
+! Overall BC2 angle
+! Lp_drift is the total projected length of the drift between the first and second bends
+O_HM.chica: overlay={
+  O_HM.chica.ben01[theta]:angle_deg*pi/180, 
+  O_HM.chica.ben02[theta]:-angle_deg*pi/180, 
+  O_HM.chica.ben03[theta]:-angle_deg*pi/180, 
+  O_HM.chica.ben04[theta]:angle_deg*pi/180,
+  HM.chica.pip02[L]:Lp_drift*(1/cos(angle_deg*pi/180)),
+  HM.chica.pip04[L]:Lp_drift*(1/cos(angle_deg*pi/180))},
+  var = {angle_deg, Lp_drift}, 
+  angle_deg = hm_theta_default*180/pi,
+  Lp_drift=hm_Lp_drift_default
+  
+  
+  
+hm_chica_Ltot = HM.chica.pip01[L] + HM.chica.pip03[L] + HM.chica.pip05[L] + 4*hm_Lp_bend_default + 2*hm_Lp_drift_default

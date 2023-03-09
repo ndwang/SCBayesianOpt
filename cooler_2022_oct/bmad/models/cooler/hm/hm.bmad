@@ -1,0 +1,103 @@
+!---------------------
+! Markers
+HM.Mar.BEG: marker
+HM.Mar.MID: marker, superimpose, ref = HM.Pip03
+HM.Mar.END: marker
+
+!---------------------
+! Geometry
+
+
+HM.angle0 =  14.63*pi/180
+
+
+
+
+!---------------------
+! Chicane
+call, file = chica/chica.bmad
+O_HM.CHICA[ANGLE_DEG] = 0
+
+
+!---------------------
+! Pipes
+
+HM.Pip01: pipe, L = 7 -3 ! Accout for dump chicane with leading pipe
+
+HM.Pip02: pipe, L = 28 - hm_chica_Ltot
+
+HM.Pip03: pipe, L = 3
+
+
+
+!---------------------
+! Dechirper cavity
+
+HM.cav01: rfcavity, L = 1.860, n_cell = 5, rf_frequency = 591e6,
+!   mat6_calc_method = Tracking, tracking_method = Runge_Kutta,
+!    field_calc = FieldMap, field_master = T,
+!    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/BNL_591MHz_5cell_center.h5,
+    superimpose, 
+    ref = HM.chica.Pip05, 
+    !offset = 0, ref_origin = end, ele_origin=end,
+    longitudinal=0
+    
+
+
+!---------------------
+! Bends
+
+HM.Ben00: sbend, fringe_type = full, L = 0.1
+
+HM.Ben01: HM.Ben00, angle = HM.angle0/2
+HM.Ben02: HM.Ben00, angle = HM.angle0/2
+
+
+
+
+!---------------------
+! Quads
+HM.Qua00: quad, L = 0.06
+
+
+HM.Qua01: HM.Qua00, superimpose, ref = HM.Pip01, ref_origin=beginning, offset = 0.5
+HM.Qua02: HM.Qua00, superimpose, ref = HM.Pip01, ref_origin=beginning, offset = 3.0
+
+
+
+HM.Qua03: HM.Qua00, superimpose, ref = HM.Pip02, ref_origin=beginning, offset = 1
+HM.Qua04a: HM.Qua00, superimpose, ref = HM.Pip02, ref_origin=end, offset = -4
+HM.Qua04: HM.Qua00, superimpose,  ref = HM.Pip02, ref_origin=end, offset = -2
+HM.Qua05: HM.Qua00, superimpose,  ref = HM.Pip02, ref_origin=end, offset = -0.5
+
+HM.Qua06: HM.Qua00, superimpose, ref = HM.Pip03
+
+! Closed dispersion
+HM.QUA06[K1] =   2.17853372883532E+01
+
+! Matched Beta/Alpha
+HM.QUA01[K1] =  5.82079510089861030E-001
+HM.QUA02[K1] = -3.90972509877234664E+000
+HM.CHICA.QUA01[K1] =  3.05416279061133844E+000
+HM.CHICA.QUA02[K1] = -4.03212742867543383E-001
+HM.CHICA.QUA03[K1] = -1.10307994982846269E+000
+HM.CHICA.QUA04[K1] =  1.44943553597537722E+000
+HM.QUA03[K1] =  1.32762306531443528E-002
+HM.QUA04A[K1] =  3.65568862990042387E+000
+HM.QUA04[K1] = -9.29329012124519238E+000
+HM.QUA05[K1] =  8.60392416428924456E+000
+
+
+!---------------------
+! Lines
+
+HM: line = (HM.Mar.BEG,
+    HM.Pip01,
+    HM.chica, 
+    HM.Pip02,
+    HM.Ben01, 
+    HM.Pip03, 
+    HM.Ben02,
+    HM.Mar.END)
+
+

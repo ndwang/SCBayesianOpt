@@ -1,0 +1,28 @@
+BEGINNING[BETA_A] =      1.73650632 
+BEGINNING[ALPHA_A] =    1.87298256  
+BEGINNING[BETA_B] =      28.24546746 
+BEGINNING[ALPHA_B] =      -5.11191220 
+
+
+
+
+    
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+
+call, file = c7.bmad
+
+use, c7
+
+call, file = ../c6/c6.bmad
+
+! Note: Reversed
+lat: line = (c7, c6)
+
+use, lat
+

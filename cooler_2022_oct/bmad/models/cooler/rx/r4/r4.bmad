@@ -1,0 +1,184 @@
+!---------------------
+!---------------------
+! R4
+! Return Line segment 4
+
+
+
+!---------------------
+! Markers
+
+R4.Mar.BEG: marker
+R4.Mar.MID: marker, superimpose, ref=R4.Pip02
+R4.Mar.BEGF: marker
+R4.Mar.END: marker
+
+
+!---------------------
+! Fodo
+
+R4.Nfodo = 4
+R4.Lfodo = 15
+
+R4.Lq = 0.1
+
+R4.fodo01.Pip01: pipe, L = (R4.Lfodo-2*R4.Lq)/2
+
+R4.fodo01.Qua00: quad, L=R4.Lq
+
+!R4.fodo01.Qua01: quad, L=R4.Lq
+!R4.fodo01.Qua02: quad, L=R4.Lq
+
+! Optimal for round beam (90 deg phase advance):
+R4.k1_optimal =  (1/R4.Lq) * 2*sqrt(2) / R4.Lfodo
+
+
+!R4.qfodo1: overlay = {R4.fodo01.Qua01[k1]:k1, R4.fodo01.Qua02[k1]:-k1}, var = {k1}, k1 = R4.k1_optimal
+!R4.fodo: line = (R4.fodo01.Pip01, R4.fodo01.Qua01, R4.fodo01.Pip01, R4.fodo01.Qua02)
+
+R4.fodo01.Qua01: R4.fodo01.Qua00, k1 = R4.k1_optimal
+R4.fodo01.Qua02: R4.fodo01.Qua00, k1 = -R4.k1_optimal
+R4.fodo01.Qua03: R4.fodo01.Qua00, k1 = R4.k1_optimal
+R4.fodo01.Qua04: R4.fodo01.Qua00, k1 = -R4.k1_optimal
+R4.fodo01.Qua05: R4.fodo01.Qua00, k1 = R4.k1_optimal
+R4.fodo01.Qua06: R4.fodo01.Qua00, k1 = -R4.k1_optimal
+R4.fodo01.Qua07: R4.fodo01.Qua00, k1 = R4.k1_optimal
+R4.fodo01.Qua08: R4.fodo01.Qua00, k1 = -R4.k1_optimal
+!R4.fodo01.Qua09: R4.fodo01.Qua00, k1 = R4.k1_optimal
+!R4.fodo01.Qua10: R4.fodo01.Qua00, k1 = -R4.k1_optimal
+
+
+R4.fodo1: line = (R4.fodo01.Pip01, R4.fodo01.Qua01, R4.fodo01.Pip01, R4.fodo01.Qua02)
+R4.fodo2: line = (R4.fodo01.Pip01, R4.fodo01.Qua03, R4.fodo01.Pip01, R4.fodo01.Qua04)
+R4.fodo3: line = (R4.fodo01.Pip01, R4.fodo01.Qua05, R4.fodo01.Pip01, R4.fodo01.Qua06)
+R4.fodo4: line = (R4.fodo01.Pip01, R4.fodo01.Qua07, R4.fodo01.Pip01, R4.fodo01.Qua08)
+!R4.fodo5: line = (R4.fodo01.Pip01, R4.fodo01.Qua09, R4.fodo01.Pip01, R4.fodo01.Qua10)
+
+!---------------------
+! Pipes
+
+R4.Pip00: pipe
+
+R4.Pip01: R4.Pip00, L = 33.44 ! rough guess
+R4.Pip02: R4.Pip00, L = 4
+
+!R4.Pip03.Ltot = 90.07 ! rough guess
+!R4.Pip03: R4.Pip00, L = (R4.Pip03.Ltot - R4.Nfodo*R4.Lfodo)/2
+!R4.Pip04: R4.Pip00, L = R4.Pip03[L]
+
+R4.Pip03: R4.Pip00
+R4.Pip04: R4.Pip00
+R4.Pip05: R4.Pip00
+R4.Pip06: R4.Pip00
+
+R4.Pip03[L] = 7.5
+
+R4.Pip04[L] = 3 ! rough guess
+R4.Pip05[L] = 5.5 ! inserted to accomodate a cryomodule
+R4.Pip06[L] = 4
+
+! makes geometry closed
+R4.PIP01[L] =  3.31502229131757389E+001
+R4.PIP04[L] =  3.21604196082449123E+000
+
+
+!---------------------
+! Bends
+
+R4.Ben00: sbend, L = 0.3, fringe_type = full
+
+R4.Ben01: R4.Ben00
+R4.Ben02: R4.Ben00
+
+R4.Ben01.Connect = -3.25377758958208863E-001
+
+R4.Bends: overlay = {R4.Ben01[G]:g1, R4.Ben02[G]:g1}, var = {g1}, g1 = R4.Ben01.Connect
+
+!---------------------
+! Quads
+
+R4.Qua00: quad, L = 0.1
+
+R4.Qua01: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=beginning, ele_origin=center, offset=0.5
+R4.Qua02: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=beginning, ele_origin=center, offset=2
+
+R4.Qua03: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=beginning, ele_origin=center, offset=0.27*R4.Pip01[L]
+R4.Qua04: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=beginning, ele_origin=center, offset=0.5*R4.Pip01[L]
+
+R4.Qua05: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=beginning, ele_origin=center, offset=0.73*R4.Pip01[L]
+
+
+R4.Qua06: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=end, ele_origin=end, offset=-3
+R4.Qua07: R4.Qua00, superimpose, ref=R4.Pip01, ref_origin=end, ele_origin=end, offset=-1
+
+R4.Qua08: R4.Qua00, superimpose, ref=R4.Pip02
+
+R4.Qua09: R4.Qua00, superimpose, ref=R4.Pip03, ref_origin=beginning, ele_origin=beginning, offset=1
+R4.Qua10: R4.Qua00, superimpose, ref=R4.Pip03, ref_origin=beginning, ele_origin=beginning, offset=3
+
+R4.Qua11: R4.Qua00, superimpose, ref=R4.Pip03, ref_origin=beginning, ele_origin=beginning, offset=5
+
+R4.Qua12: R4.Qua00, superimpose, ref=R4.Pip06, ref_origin=end, ele_origin=end, offset=-3
+R4.Qua13: R4.Qua00, superimpose, ref=R4.Pip06, ref_origin=end, ele_origin=end, offset=-2.5
+R4.Qua14: R4.Qua00, superimpose, ref=R4.Pip06, ref_origin=end, ele_origin=end, offset=-.5
+R4.Qua15: R4.Qua00, superimpose, ref=R4.Pip06, ref_origin=end, ele_origin=end, offset=-.1
+
+
+!---------------------
+! Chirper cavity
+R4.cav01: rfcavity, L = 1.860, n_cell = 5, rf_frequency = 591e6,
+!   mat6_calc_method = Tracking, tracking_method = Runge_Kutta,
+!    field_calc = FieldMap, field_master = T,
+!    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/BNL_591MHz_5cell_center.h5,
+    superimpose, 
+    ref = R4.Pip05, 
+    !offset = 0, ref_origin = end, ele_origin=end, offset = -2,
+    voltage = 0,
+    longitudinal=0
+
+
+
+!---------------------
+! Solution
+
+R4.QUA08[K1] =  9.44816932983887980E+000
+
+R4.QUA01[K1] = -1.38821868909015880E+001
+R4.QUA02[K1] =  5.52468763832134346E+000
+R4.QUA03[K1] = -2.43925830974865843E+000
+R4.QUA04[K1] =  2.14410059748233595E+000
+R4.QUA05[K1] = -2.54529183270880122E+000
+R4.QUA06[K1] =  4.88862301196971050E+000
+R4.QUA07[K1] = -4.41297428036092310E+000
+R4.QUA09[K1] = -3.91379324078703306E+000
+R4.QUA10[K1] =  5.43735844563122761E+000
+R4.QUA11[K1] = -2.89380304315271664E+000
+
+R4.FODO01.QUA07[K1] =  1.04263393697123963E+000
+R4.FODO01.QUA08[K1] = -8.67431309455766408E-001
+R4.QUA12[K1] =  7.40423079138720519E-001
+R4.QUA13[K1] = -2.72413869595365732E-001
+R4.QUA14[K1] =  1.15769360777326078E+001
+R4.QUA15[K1] = -1.65950749620427551E+001
+
+
+
+!---------------------
+! Lines
+
+R4: line = (R4.Mar.BEG,
+    R4.Pip01,
+    R4.Ben01,
+    R4.Pip02,
+    R4.Ben02,
+    R4.Pip03,
+    R4.Mar.BEGF,
+    R4.fodo1,
+    R4.fodo2,
+    R4.fodo3,   
+    R4.fodo4,
+   ! R4.fodo5,
+    R4.Pip04,
+    R4.Pip05,
+    R4.Pip06,   
+    R4.Mar.END)

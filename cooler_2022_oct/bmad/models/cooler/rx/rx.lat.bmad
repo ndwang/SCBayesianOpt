@@ -1,0 +1,33 @@
+
+! end of ta
+BEGINNING[BETA_A] =  10.63639299
+BEGINNING[ALPHA_A] = 0.83598012
+BEGINNING[BETA_B] =  19.91179674
+BEGINNING[ALPHA_B] = -34.30271027
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+call, file = r1/r1.bmad
+call, file = r2/r2.bmad
+call, file = r3/r3.bmad
+call, file = r4/r4.bmad
+
+beginning[x_position] = -1.97393
+beginning[y_position] = 1.28599
+beginning[z_position] = -117.03341
+
+
+call, file = ../tb/tb.bmad
+
+rx_full: line = (r1, r2, r3, r4)
+
+rx_tb: line = (r1,r2,r3,r4,tb)
+
+
+!use, rx_full
+use, rx_tb
+

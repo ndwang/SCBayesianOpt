@@ -1,0 +1,80 @@
+!---------------------
+!---------------------
+! RL
+! Return Line
+
+
+
+
+
+
+
+!---------------------
+! Markers
+
+RL.Mar.BEG: marker
+RL.Mar.END: marker
+
+RL.Mar.A: marker
+RL.Mar.B: marker
+RL.Mar.C: marker
+
+
+!---------------------
+! Pipes
+
+
+RL.Pip00: pipe
+
+RL.Pip01: RL.Pip00, L = 60
+RL.Pip02: RL.Pip00, L = 5.84636
+RL.Pip03: RL.Pip00, L = 45
+RL.Pip04: RL.Pip00, L = 30
+
+
+
+
+
+!---------------------
+! Bends
+
+RL.Ben00: sbend, L  = 0.3, fringe_type = full
+
+RL.Ben01: RL.Ben00, angle = -pi/4
+RL.Ben02: RL.Ben00
+RL.Ben03: RL.Ben00
+
+!---------------------
+! Quads
+
+RL.Qua00: quad, L = 0.1
+
+
+
+!---------------------
+! Geometry
+
+RL.PIP01[L] =  1.87001495327591044E+002
+RL.PIP02[L] =  5.52714677188684522E+000
+RL.BEN02[G] =  2.58701280867478278E+000
+
+RL.PIP03[L] =  4.64979029316937940E+001
+RL.BEN03[G] = -7.10812638995747315E-001
+
+
+! Using the full model
+RL.PIP01[L] =  1.85567423073199194E+002
+RL.BEN03[G] = -7.32251222617123165E-001
+RL.PIP04[L] =  9.58527424474668521E+001
+
+
+!---------------------
+! Lines
+
+
+RL: line = (RL.Mar.BEG,
+	RL.Pip01, RL.Mar.A, RL.Ben01,
+	RL.Pip02, RL.Ben02, RL.Mar.B,
+	RL.Pip03, RL.Ben03, RL.Mar.C,
+	RL.Pip04,
+	RL.Mar.END)

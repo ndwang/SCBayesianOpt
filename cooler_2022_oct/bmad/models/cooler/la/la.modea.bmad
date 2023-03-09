@@ -1,0 +1,31 @@
+
+
+
+
+
+!! beam match
+! Will match beam at LA.CRMOD01.Mar.END
+BEGINNING[BETA_A] =  7.05634250615171155E-001
+BEGINNING[ALPHA_A] =  1.41752009745306801E-001
+BEGINNING[BETA_B] =  7.09553975158885408E-001
+BEGINNING[ALPHA_B] =  1.10066183911875060E-001
+
+
+! Mode A 
+! 150 MeV ~ 275 GeV hadrons
+
+la_final_energy = 150e6
+la_voltage = la_final_energy - 6e6
+
+la_phase_deg = 0
+
+O_LA[phase_deg] = la_phase_deg
+O_LA[phase3_deg] = 180
+
+O_LA[voltage]  = la_voltage
+O_LA[voltage3] = 18.7e6 ! la_voltage/9
+
+O_LA_Q1[B1_GRADIENT] =  1.27803056235754914E-001
+O_LA_Q2[B1_GRADIENT] = -1.38938545350594606E-001
+O_LA_Q3[B1_GRADIENT] =  5.36530716056158763E-001
+O_LA_Q4[B1_GRADIENT] = -5.83557336100471558E-001

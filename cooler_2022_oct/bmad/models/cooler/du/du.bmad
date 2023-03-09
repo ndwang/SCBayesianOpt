@@ -1,0 +1,85 @@
+!---------------------
+! Markers
+DU.Mar.BEG: marker
+DU.Mar.Face: MARKER
+DU.Mar.END: marker
+
+!---------------------
+! Geometry
+
+
+DU.theta =  15*pi/180 * 6/150
+DU.ref_tilt = pi/2
+DU.Lp = 0.1
+DU.Ltot = 2
+
+! Calculated
+DU.Lp_drift = (DU.Ltot - 4*DU.Lp)/2
+DU.g = sin(DU.theta)/DU.Lp
+DU.L = DU.Lp/sinc(DU.theta)
+
+
+!---------------------
+! Pipes
+
+
+DU.Pip01: pipe, L = 1
+DU.Pip02: pipe, L = DU.Lp_drift/cos(DU.theta)
+DU.Pip03: pipe, L = DU.Lp_drift/cos(DU.theta)
+
+DU.Pip04: Pipe, L = 4
+
+
+!---------------------
+! Bends
+
+DU.Ben00: sbend, fringe_type = full, L = DU.L
+
+DU.Ben01: DU.Ben00, angle = DU.theta, e1=0, e2=DU.theta, ref_tilt=+DU.ref_tilt
+DU.Ben02: DU.Ben00, angle = -2*DU.theta, e1=-DU.theta, e2=-DU.theta, ref_tilt=+DU.ref_tilt, L = DU.Ben00[L]*2
+DU.Ben03: DU.Ben00, angle = DU.theta, e1=DU.theta, e2=0, ref_tilt=+DU.ref_tilt
+
+
+!---------------------
+! Beam Stop
+DU.Dum01: INSTRUMENT, TYPE = "BEAMSTOP", L = 3.0, APERTURE = 0.46
+DU.Dum01[descrip] = "3DMODEL=7106-300-L0-dump_STL/7106-300-L0-dump.blend"
+ 
+!---------------------
+! Patch
+du.demerge_patch: patch
+DU.DEMERGE_PATCH[Y_OFFSET] =  -12.89611662 * 1e-3 !TODO: automate these
+DU.DEMERGE_PATCH[Y_PITCH]  =  -256.14573269  * 1e-3
+
+ 
+
+!---------------------
+! Quads
+Du.Qua00: quad, L = 0.1
+
+Du.Qua01: Du.Qua00, superimpose, ref = DU.Pip04, ref_origin=beginning, ele_origin=beginning, offset = 0.5
+Du.Qua02: Du.Qua00, superimpose, ref = DU.Pip04, ref_origin=beginning, ele_origin=beginning, offset = 0.7
+
+Du.Qua03: Du.Qua00, superimpose, ref = DU.Pip04, ref_origin=end, ele_origin=end, offset = -.6
+Du.Qua04: Du.Qua00, superimpose, ref = DU.Pip04, ref_origin=end, ele_origin=end, offset = -.4
+Du.Qua05: Du.Qua00, superimpose, ref = DU.Pip04, ref_origin=end, ele_origin=end, offset = -.2
+
+!---------------------
+! Lines
+
+DU_part1: line = (DU.Pip01, DU.Ben01)
+    
+DU_part1_multi: line[multipass] = (DU_part1)
+    
+DU_part2: line = (DU.Pip02,
+    DU.Ben02, DU.Pip03, 
+    DU.Ben03)
+    
+DU_part3: line = (DU.Pip04, DU.Mar.Face, DU.Dum01)
+    
+    
+DU.chicane: line = (DU_part1_multi, DU_part2)    
+    
+DU: line = (DU.Mar.BEG, DU_part1_multi, du.demerge_patch, DU_part3, DU.Mar.END)
+
+

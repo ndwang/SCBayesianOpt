@@ -1,0 +1,77 @@
+
+
+MG.bend_angle = 10*pi/180
+MG.arc_length = 0.3
+MG.pipe_length = 4.2
+
+MG.Ben01: sbend, fringe_type=full, e1 = +MG.bend_angle/4, e2 = +MG.bend_angle/4, g = +MG.bend_angle/MG.arc_length, L = MG.arc_length
+MG.Ben02: sbend, fringe_type=full, e1 = -MG.bend_angle/4, e2 = -MG.bend_angle/4, g = -MG.bend_angle/MG.arc_length, L = MG.arc_length
+
+MG.Pip01a: Pipe, L= 1.5/2
+MG.spacer1: drift, L = 0
+MG.spacer2: drift, L = 0
+MG.Pip01b: Pipe, L= 1.5/2
+MG.Pip02: Pipe, L = MG.pipe_length
+MG.Pip03: Pipe, L= 2.150
+
+
+MG.sol_1_offset = 1.05
+MG.sol_2_offset = 3.15
+
+MG.ksol = 4.09348179899412834E+000
+
+MG.Sol01: solenoid, l = 0.5, ks = +MG.ksol, superimpose, ref = MG.Pip02, ref_origin=beginning, ele_origin=center, offset=MG.sol_1_offset
+MG.Sol02: solenoid, l = 0.5, ks = -MG.ksol, superimpose, ref = MG.Pip02, ref_origin=beginning, ele_origin=center, offset=MG.sol_2_offset
+
+MG.Mar.Mid: marker, superimpose, ref = MG.Pip02, ref_origin=center, ele_origin=center
+
+MG.Mar.Beg: marker
+MG.Mar.END: marker
+
+
+
+
+
+!--------------------------
+! Matching solenoid
+
+QM.Qua: quadrupole, L = 0.1
+
+MG.SolX: solenoid, l = 0.5
+MG.SolX1: MG.SolX, superimpose, ref = MG.Pip01a!, ref_origin=beginning, ele_origin=beginning
+MG.SolX2: MG.SolX, superimpose, ref = MG.Pip01b!, ref_origin=end, ele_origin=end
+MG.SolX3: MG.SolX, superimpose, ref = MG.Pip03, ref_origin=beginning, ele_origin=beginning
+
+
+
+MG.SolX1[offset] =  0.1
+MG.SolX2[offset] = -0.1
+MG.SolX3[offset] =  0.1
+
+! solution
+MG.SOLX1[bs_field] = 0.025803712024358084
+MG.SOLX2[bs_field] = 0.047931004967311605
+MG.SOLX3[bs_field] = 0.07530308869962626
+
+
+mg.spacer1[L] =  0.5 !  0.007280073865847406
+mg.spacer2[L] =  0.5 ! 0.17042463185826023
+
+
+
+MG.Mar.BegBend: marker
+
+MG_part0: line = (MG.Mar.Beg, MG.Pip01a, MG.spacer1, MG.Pip01b, MG.spacer2)
+
+MG_part1: line = (MG.Mar.BegBend, MG.Ben01, MG.Pip02)
+
+MG_part2: line = (MG.Ben02, MG.Pip03, MG.Mar.END)
+ 
+ 
+! Multipass
+multi_MG_part2: line[multipass] = (MG_part2) 
+ 
+ 
+MG: line = (MG_part0, MG_part1, MG_part2)
+
+MG_multi: line = (MG_part0, MG_part1, multi_MG_part2)

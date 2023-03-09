@@ -1,0 +1,23 @@
+LA_frequency = 591e6
+LA_wavelength = c_light/LA_frequency
+
+
+LA.CAV: Lcavity, L = 1.860, n_cell = 5, rf_frequency = LA_frequency, 
+!   mat6_calc_method = Tracking, tracking_method = Runge_Kutta,
+!    field_calc = FieldMap, field_master = T,
+!    grid_field = call::$EIC_LATTICE/bmad/fieldmaps/BNL_591MHz_5cell_fieldmesh.h5,
+longitudinal=0
+
+
+
+LA.CAVH: Lcavity, L =  0.620, n_cell = 5, rf_frequency = 3*LA_frequency,
+!   mat6_calc_method = Tracking, tracking_method = Runge_Kutta,
+!    field_calc = FieldMap, field_master = T,
+!    grid_field = call:::$EIC_LATTICE/bmad/fieldmaps/BNL_1773MHz_5cell_fieldmesh.h5,
+    longitudinal=0
+
+LA.CAVH[voltage] = 18.7e6/2
+LA.CAVH[phi0] = 0.5
+
+LA.CAV[voltage] = (150e6 - 5.76e6 + 2*LA.CAVH[voltage])/8
+LA.CAV[field_master] = T

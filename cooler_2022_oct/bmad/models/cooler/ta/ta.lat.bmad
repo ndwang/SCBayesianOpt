@@ -1,0 +1,32 @@
+BEGINNING[BETA_A] =  1.06363929852751156E+001
+BEGINNING[ALPHA_A] = -8.35980122689927607E-001
+BEGINNING[BETA_B] =  1.99117967388834565E+001
+BEGINNING[ALPHA_B] =  3.43027102695495927E+001
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+call, file = ta.bmad
+
+!call, file = markers.bmad
+
+
+
+TA.match: match,
+  beta_a0 = 10,
+  beta_b0 = 10,
+  beta_a1 = 10,
+  beta_b1 = 10
+
+
+TA.match[beta_a1]  =  1.55155809676772449E+001
+TA.match[alpha_a1] =  3.20305059914836932E+000
+TA.match[beta_b1]  = 2.87891358530878385E+001
+TA.match[alpha_b1] =  4.37113821480573534E+001
+
+lat: line = (TA.match, ta)
+
+!use, lat
+use, ta

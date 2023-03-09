@@ -1,0 +1,52 @@
+!------------------
+! MH (Merge High Energy)
+
+MH.Mar.BEG: marker
+MH.Mar.END: marker
+
+!------------------
+! Bends
+MH.Ben00: sbend, fringe_type=full, L = 0.3
+MH.Ben01: MH.Ben00, g =  (-5.8177642E-01 + 5.5858978E-01)
+MH.Ben02: MH.Ben00
+
+!------------------
+! Pipes
+MH.Pip01: Pipe, L = 4.5
+MH.Pip02: Pipe, L = 1.5
+MH.Pip03: Pipe, L = 1.5
+
+!------------------
+! Quads
+MH.Qua00: quad, L = 0.1
+MH.Qua01: MH.Qua00, superimpose, ref=MH.PIP01, ref_origin=beginning, ele_origin=beginning, offset = 0.1
+MH.Qua02: MH.Qua00, superimpose, ref=MH.PIP01, ref_origin=beginning, ele_origin=beginning, offset = 0.5
+MH.Qua03: MH.Qua00, superimpose, ref=MH.PIP01, ref_origin=end, ele_origin=end, offset = -0.5
+MH.Qua04: MH.Qua00, superimpose, ref=MH.PIP01, ref_origin=end, ele_origin=end, offset = -0.1
+
+
+!------------------
+! Patch
+MH.connect: patch, flexible = T
+
+!------------------
+! Lines
+
+MH: line = (MH.Mar.BEG,
+MH.Pip01, MH.Ben01, 
+MH.Pip02, MH.Ben02, 
+MH.Pip03,
+MH.Mar.END)
+
+
+! Will connect mode A orbit
+MH.BEN02[G] =  4.65109022557214299E-002
+MH.PIP02[L] =  1.06525913529247118E+000
+MH.PIP03[L] =  1.38190911394468818E+000
+
+
+! Match optics into LA
+MH.QUA01[K1] = -1.83036851665764502E+001
+MH.QUA02[K1] =  9.77815353194357506E+000
+MH.QUA03[K1] =  8.61189189627739715E+000
+MH.QUA04[K1] = -1.13964943632798938E+001

@@ -1,0 +1,91 @@
+!---------------------
+!---------------------
+! C3
+! Cooling Section 3
+
+
+
+!---------------------
+! Triplets
+! TODO: make unique
+! call, file = ../triplet/triplet2.bmad
+
+trip01.Pip01: pipe, L = 1.28 + 0.24
+trip01.Qua01:  quad, L = 0.06, superimpose, ref = trip01.Pip01, offset = -.2
+trip01.Qua02:  quad, L = 0.12, superimpose, ref = trip01.Pip01
+trip01.Qua03:  quad, L = 0.06, superimpose, ref = trip01.Pip01, offset = .2
+
+trip01.Qua01[k1] = -3.45583830000000205E+001
+trip01.Qua02[k1] =  2.95921439999999940E+001
+trip01.Qua03[k1] = trip01.Qua01[k1]
+
+trip01.mar.BEG: Marker
+trip01.mar.END: Marker
+
+triplet2: line = (!trip01.mar.BEG, 
+	trip01.Pip01)
+	!trip01.mar.END)
+
+qtrip1: overlay = {trip01.Qua01, trip01.Qua03}, k1 = -3.78123830000000325E+001
+qtrip2: overlay = {trip01.Qua02}, k1 =  3.31121439999999936E+001
+
+
+!---------------------
+! Markers
+
+C3.Mar.BEG: marker
+C3.Mar.BEGT: marker
+C3.Mar.ENDT: marker
+C3.Mar.END: marker
+
+!---------------------
+! Pipes
+
+
+C3.PipXX: pipe, L = 93.571105 - 41.167000 ! dummy
+
+C3.Pip01: pipe, L = 0 !2
+C3.Pip02: pipe, L = 3
+
+
+
+!---------------------
+! Quads
+
+C3.Qua00: quad, L = 0.1
+
+!C3.Qua01: C3.Qua00, superimpose, ref = C3.Pip01, ref_origin=beginning, offset = 0.2
+!C3.Qua02: C3.Qua00, superimpose, ref = C3.Pip01, ref_origin=beginning, offset = 0.5
+!C3.Qua03: C3.Qua00, superimpose, ref = C3.Pip01, ref_origin=end, offset = -.5
+!C3.Qua04: C3.Qua00, superimpose, ref = C3.Pip01, ref_origin=end, offset = -.2
+!
+C3.Qua05: C3.Qua00, superimpose, ref = C3.Pip02, ref_origin=beginning, offset = 0.2
+C3.Qua06: C3.Qua00, superimpose, ref = C3.Pip02, ref_origin=beginning, offset = 0.5
+C3.Qua07: C3.Qua00, superimpose, ref = C3.Pip02, ref_origin=end, offset = -.5
+C3.Qua08: C3.Qua00, superimpose, ref = C3.Pip02, ref_origin=end, offset = -.2
+!
+!C3.QUA01[K1] = -2.30665561475166321E+001
+!C3.QUA02[K1] =  2.49005184693959194E+001
+!C3.QUA03[K1] =  1.34947860931370691E+001
+!C3.QUA04[K1] = -3.64056112891377452E+001
+!
+C3.QUA05[K1] = -1.03143732825620003E+001
+C3.QUA06[K1] =  1.93238306817606897E+001
+C3.QUA07[K1] = -1.22729167175660692E+001
+C3.QUA08[K1] =  4.87035432475623420E+000
+
+!---------------------
+! Lines
+
+
+C3: line = (C3.Mar.BEG,
+	C3.Pip01,
+	C3.Mar.BEGT, 	26*triplet2, C3.Mar.ENDT,
+	C3.Pip02,
+	C3.Mar.END)
+
+
+
+C3_dummy: line = (C3.Mar.BEG,
+	C3.PipXX,
+	C3.Mar.END)
