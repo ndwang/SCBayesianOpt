@@ -1,0 +1,264 @@
+!+
+! Translated from MADX to Bmad by madx_to_bmad.py
+! File: hadron_ir2.madx
+!-
+
+kf = 0.08148158
+kd = 0.08351371
+!!! pi = 3.14159265358979323846264338
+na = 11
+lq = 1.11
+lavehc = 14.8110482756
+ldip = 9.440656
+lsep = 0.9
+ldps = 2.94942686017e+00
+ldptot = 2.31467343482e+01
+lqd = 0.5*(lavehc - ldip - lq)
+ldp5 = ldptot - 2.0 * ldps - ldip
+rho = 6.0 * ( ldip * ( na + 1.0 ) + ldp5 + 2.0 * ldps ) / pi
+thcell = ldip / rho
+thd5 = ldp5 / rho
+thds = ldps / rho
+thd0 = 0.0036745387
+ldspqd = lsep * tan(thcell / 2.0) / 2.0
+ld5o = rho * (thd5 + thd0)
+ld5i = rho * (thd5 - thd0)
+ld5 = rho * thd5
+delta_lqd = -0.008759
+delta_oqmt = 0.017645
+l_inner_hc = 14.793530
+foqd5 = 0.5
+foqd6 = 0.2
+lqd6tot = l_inner_hc - ldps - lq
+lqd6 = 0.5 * lqd6tot
+lqd62a = 0.0 * lqd6tot
+lqd62b = lqd6tot - lqd62a
+lqd61a = 0.5  * lqd6tot
+lqd61b = lqd6tot - lqd61a
+lq7 = 0.929744
+lqd5tot = l_inner_hc - ld5  - 0.5*(lq + lq7)
+lqd5a = 0.5 * lqd5tot
+lqd5b = lqd5tot - lqd5a
+lqdx1a = 0.5 * lqd5tot
+lqdx1b = lqd5tot - lqdx1a
+lqdx2b = 0.5 * lqd5tot
+lqdx2a = lqd5tot - lqdx2b
+theta = .01
+l76 = 4.0
+l65 = 56.699873
+l6m = 44.195574
+loguts6 = lqd6tot + ldps
+k9 = 0.00127559
+k8 = 0.05390650
+k7 = -0.11293284
+k6 = 0.04668315
+k5 = 0.10535697
+k4 = -0.12607357
+k3 = 0.01824580
+k2 = 0.05221726
+k1 = -0.03412762
+
+! STRENGTH
+! ------------------
+
+! GEOMETRY
+! ------------------
+
+
+
+
+
+
+! Play +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+! MAGNETS
+! ------------------
+mqd: marker
+mqf: marker
+
+oqdi: drift, l = lqd - ldspqd
+oqdo: drift, l = lqd + ldspqd
+
+d: sbend, l = ldip, angle = thcell
+d5i: sbend, l = ld5i, angle = thd5 - thd0
+d5o: sbend, l = ld5o, angle = thd5 + thd0
+ds: sbend, l = ldps, angle = thds
+
+! Revisions =======================================================================
+
+anchor: marker
+merge: marker
+mend: marker
+
+mq6: marker
+mq2: marker
+clock2: marker
+
+m_d: marker
+m_d5: marker
+m_d6: marker
+
+q_micron: quadrupole, l = 0.000001, k1 = 0
+
+qf: quadrupole, l = lq, k1 = kf
+qd: quadrupole, l = lq, k1 = -kd
+
+oqd: drift, l = lqd + delta_lqd
+
+oqd61a: drift, l = lqd61a
+oqd61b: drift, l = lqd61b
+
+oqd62a: drift, l = lqd62a
+oqd62b: drift, l = lqd62b
+
+oqd6: drift, l = lqd6
+
+oqmt: drift, l = ldip + delta_oqmt
+
+
+oqdx1a: drift, l = lqdx1a
+oqdx1b: drift, l = lqdx1b
+oqdx2a: drift, l = lqdx2a
+oqdx2b: drift, l = lqdx2b
+
+d_meter: drift, l = 1.0
+
+!d_merge_to_q2: drift, l = l_merge_to_q2
+!d_half_amp: drift, l = l_half_amp
+
+d5: sbend, l = ld5, angle = thd5
+d6: sbend, l = ldps, angle = thds
+
+! LINES
+! ------------------
+cello: LINE = (mqf, hqf, oqdo, d, oqdo, hqd, mqd, hqd, oqdo, d, oqdo, hqf)
+celli: LINE = (mqd, hqd, oqdi, d, oqdi, hqf, mqf, hqf, oqdi, d, oqdi, hqd)
+
+hqf: quadrupole, l = 0.5*lq, k1 = kf
+hqd: quadrupole, l = 0.5*lq, k1 = -kd
+hcellmtfd: LINE = (hqf, gutsmt, hqd)
+hcellmtdf: LINE = (hqd, gutsmt, hqf)
+cellmtf: LINE = (hcellmtfd, hcellmtdf)
+cellmtd: LINE = (hcellmtdf, hcellmtfd)
+hcellfd: LINE = (hqf, oqd, d, oqd, hqd)
+hcelldf: LINE = (hqd, oqd, d, oqd, hqf)
+cellf: LINE = (hcellfd, hcelldf)
+celld: LINE = (hcelldf, hcellfd)
+
+! ---------------------------------------------------------------------------------------
+! MAIN LENGTHS & STRENGTHS & MARKERS & LINES
+! ---------------------------------------------------------------------------------------
+
+half_d: sbend, l = 0.5*ldip, angle = 0.5*thcell
+hd5: sbend, l = 0.5*ld5, angle = 0.5*thd5
+hd6: sbend, l = 0.5*ldps, angle = 0.5*thds
+
+oqd6left: drift, l = 2.124247
+oqd6right: drift, l = 8.621902
+
+! Edit fractions here to slide dipoles around in the D5 and D69 half cells
+! lqd5tot := l_inner_hc - ld5  - lq;
+oqd5a: drift, l = foqd5         * lqd5tot
+oqd5b: drift, l = (1.0 - foqd5) * lqd5tot
+oqd6a: drift, l = foqd6         * lqd6tot
+oqd6b: drift, l = (1.0 - foqd6) * lqd6tot
+
+hq1: quadrupole, l = 0.5*lq, k1 = k1
+hq2: quadrupole, l = 0.5*lq, k1 = k2
+hq3: quadrupole, l = 0.5*lq, k1 = k3
+hq4: quadrupole, l = 0.5*lq7, k1 = k4
+!!!!!!!!!!
+hq5: quadrupole, l = 0.5*lq, k1 = k5
+hq6: quadrupole, l = 0.5*lq, k1 = k6
+hq7: quadrupole, l = 0.5*lq7, k1 = k7
+!!!!!!!!!!
+hq8: quadrupole, l = 0.5*lq, k1 = k8
+hq9: quadrupole, l = 0.5*lq, k1 = k9
+
+m_kicker_center: marker
+m_kicker_start: marker
+m_kicker_stop: marker
+
+! ---------------------------------------------------------------------------------------
+! Use CHICANE to test the R56 machinery ... i
+! ---------------------------------------------------------------------------------------
+
+
+chic_o1: drift, l = 1.0
+chic_o2: drift, l = 0.90
+chic_o3: drift, l = 2.0
+
+chic_bend_plus: sbend, l = 0.10, angle = theta
+chic_bend_minus: sbend, l = 0.10, angle = -theta
+
+chic_qf: quadrupole, l = 0.0000001, k1 = 0.1
+chic_qd: quadrupole, l = 0.0000001, k1 = -0.1
+
+chic_left: line  =  (chic_o1, chic_qf, chic_bend_plus, chic_o2, chic_bend_minus, chic_qd, chic_o3)
+chic_right: line = (-(chic_left))
+chicane: line = (m_kicker_center, chic_left, chic_right, m_kicker_center)
+
+! ---------------------------------------------------------------------------------------
+
+! Run "find_l65.py" first, and then "find_l6m.py"
+! nominal value
+! l65 := 56.731711;    ! 45 mm value
+! l6m := 47.169678;    ! 45 mm value
+! 25 mm value
+! 25 mm value
+
+odmt: drift, l = ldip
+
+oguts6: drift, l = loguts6
+! Has the same length as guts6
+o76: drift, l = l76
+o6k: drift, l = 0.5*l65 - loguts6
+okm: drift, l = l6m - 0.5*l65
+om5: drift, l = l65 - l6m
+
+guts6_stub: LINE = (oqd6left, hd6,m_d6,hd6,                 oqd6right)
+guts5:      LINE = (oqd5a,    hd5,m_d5,hd5,                 oqd5b)
+guts6:      LINE = (oqd6a,    hd6,m_d6,hd6, m_kicker_start, oqd6b)
+gutsd:      LINE = (oqd,      half_d,m_d,half_d,            oqd)
+guts0:      LINE = (oqd, oqmt, oqd)
+gutsmt:     LINE = (oqd, odmt, oqd)
+!! perhaps guts0 and gutsmt should differ in length. Compare quad center spacings.
+
+stub:              LINE = (hqd, guts6_stub, hq9,hq9, gutsd,  hq8,hq8, guts0, hq7)
+
+kicker_25:         LINE = (hq7, o76, hq6,hq6,    guts6, o6k, m_kicker_center, okm, m_kicker_stop, q_micron, om5, hq5,
+         hq5, o76, hq4)
+kicker_25_b_max:   LINE = (hq7, o76, hq6,hq6,    guts6, o6k, m_kicker_center, okm, m_kicker_stop, q_micron, om5)
+kicker_25_left:    LINE = (hq7, o76, hq6,hq6,    guts6, o6k)
+kicker_25_right:   LINE = (                                                   okm, m_kicker_stop, q_micron, om5, hq5,
+         hq5, o76, hq4)
+amplifier_left_25: LINE = (hq4, guts5, hq3,hq3, oguts6, hq2,hq2, gutsmt, hq1)
+k2m_left:          LINE = (m_kicker_center, kicker_25_right, amplifier_left_25)
+k2m_right:         LINE = (-k2m_left)
+k2m:               LINE = (k2m_left, clock2, k2m_right)
+left:  LINE = (stub, anchor, kicker_25, amplifier_left_25)
+
+! kicker_45:         LINE = (hq7, o76, hq6,hq6,   oguts6, o6k, m_kicker_center, okm, m_kicker_stop, q_micron, om5, hq5,hq5, o76, hq4);
+! amplifier_left_45: LINE = (hq4, guts5, hq3,hq3,  guts6, hq2,hq2, gutsmt, hq1);
+! left:  LINE = (stub, anchor, kicker_45, amplifier_left_45);
+
+right: LINE = (-left)
+ir2: LINE = (left, clock2, right)
+
+!system, "grep '40,0,40,0,56,69,INJECT'     ir2_25_mm_strengths.csv > strength_vector.asc";
+!system, "grep '40,0,40,0,50,50,DD'           ir2_25_mm_strengths.csv > strength_vector.asc";
+
+!system, "grep '50,0,10,0,50,50,DD'           ir2_25_mm_strengths.csv > strength_vector.asc";
+
+
+
+! In File: strength_vector.madx
+! Get initial values for 9 quadrupole strengths;
+!,50,0,10,0,50,50,DD

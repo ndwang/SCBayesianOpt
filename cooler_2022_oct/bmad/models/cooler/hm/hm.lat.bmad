@@ -1,0 +1,61 @@
+!Matches into Hadron line @Mar.kick1
+BEGINNING[X_POSITION] =  -1.61676591646786E+00
+BEGINNING[Z_POSITION] =   1.00515188201917E+02
+BEGINNING[THETA_POSITION] =   3.36474432315656E+00
+
+BEGINNING[BETA_A]  = 10
+BEGINNING[ALPHA_A] = 0
+BEGINNING[BETA_B]  = 10
+BEGINNING[ALPHA_B] = 0
+
+! Twiss at LA.Mar.END
+
+
+
+
+BEGINNING[BETA_A]  =    49.24946256  
+BEGINNING[ALPHA_A] =       0.14262862 
+BEGINNING[BETA_B]  =       28.31442192 
+BEGINNING[ALPHA_B] =      -1.28238452 
+
+
+
+ 
+ 
+ 
+  
+
+
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+!call, file = beginning.bmad
+
+call, file = hm.bmad
+call, file = ../du/du.bmad
+
+call, file = ../cx/c1/c1.bmad
+
+C0.Mar.BEG: marker
+C0.Mar.END: marker
+C0.Pip01: pipe, L = 1.5845637E+01
+
+C0.Qua00: quad, L = 0.06
+
+C0.Qua01: C0.Qua00, superimpose, ref = C0.Pip01, ref_origin=beginning, offset = 0.5
+C0.Qua02: C0.Qua00, superimpose, ref = C0.Pip01, ref_origin=beginning, offset = 2.0
+
+! Matched
+C0.QUA01[K1] =  -1.06567598035185E+01
+C0.QUA02[K1] =   8.64320265945825E+00
+
+C0_stub: line = (C0.Mar.Beg, C0.Pip01, C0.Mar.End)
+
+lat: line = (du.chicane, hm, c1)
+
+use, lat
+

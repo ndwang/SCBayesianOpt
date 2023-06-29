@@ -1,0 +1,26 @@
+n_particle: 30000
+r_dist:
+  truncation_fraction:
+    units: dimensionless
+    value: 0.5
+  truncation_radius:
+    units: mm
+    value: 2.3319043122
+  type: rg
+random_type: hammersley
+start:
+  MTE:
+    units: meV
+    value: 130
+  type: cathode
+t_dist:
+  alpha:
+    units: ''
+    value: 0.1
+  sigma_t:
+    units: ns
+    value: 0.08287285705
+  type: sg
+total_charge:
+  units: nC
+  value: 1

@@ -1,0 +1,48 @@
+BEGINNING[BETA_A] =     3.38317428  
+BEGINNING[ALPHA_A] =   -0.70403867  
+BEGINNING[BETA_B] =      17.85142116
+BEGINNING[ALPHA_B] =     -6.35033218
+
+   
+   
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+call, file = c1/c1.bmad
+call, file = c2/c2.bmad
+call, file = c3/c3.bmad
+call, file = c4/c4.bmad
+
+call, file = c6/c6.bmad
+call, file = c7/c7.bmad
+
+!call, file = beginning.bmad
+
+BEGINNING[X_POSITION] = -3.17135664E+00
+BEGINNING[Z_POSITION] =  9.68960812E+01
+BEGINNING[THETA_POSITION] =  3.10939882E+00
+
+
+
+!cx_full: line = (cx_half, -cx_half)
+
+cx_half: line = (c1, c2, c3, c4)
+
+cx_full: line = (c1, c2, c3, c4, -c3, -c6, -c7)
+
+
+! For geometry
+!quad::*[superimpose] = F
+
+
+call, file = ../hd/hd.bmad
+call, file = ../ta/ta.bmad
+cx_full_extra: line = (c1, c2, c3, c4, -c3, -c6, -c7, -hd, ta)
+
+
+use, cx_full_extra
+

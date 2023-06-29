@@ -1,0 +1,84 @@
+!---------------------
+! Markers
+HD.Mar.BEG: marker
+HD.Mar.MID: marker, superimpose, ref = HD.Pip02
+HD.Mar.END: marker
+
+!---------------------
+! Geometry
+
+
+HD.angle0 =  14.63*pi/180
+
+HD.L1 = 10
+HD.L2 = 10
+
+
+!---------------------
+! Pipes
+
+
+HD.Pip01: pipe, L = HD.L1
+HD.Pip02: pipe, L = HD.L2 
+
+
+!---------------------
+! Bends
+
+HD.Ben00: sbend, fringe_type = full, L = 0.1
+
+HD.Ben01: HD.Ben00, angle  = HD.angle0/2,  ref_tilt=+pi/2
+HD.Ben02: HD.Ben00, angle = -HD.angle0/2, ref_tilt=+pi/2
+
+
+
+
+!---------------------
+! Quads
+HD.Qua00: quad, L = 0.06
+
+
+HD.Qua01: HD.Qua00, superimpose, ref = HD.Pip01, ref_origin=beginning, offset = 0.5
+HD.Qua02: HD.Qua00, superimpose, ref = HD.Pip01, ref_origin=beginning, offset = 1.5
+
+HD.Qua02a: HD.Qua00, superimpose, ref = HD.Pip01
+
+HD.Qua03: HD.Qua00, superimpose, ref = HD.Pip01, ref_origin=end, offset = -2
+HD.Qua04: HD.Qua00, superimpose, ref = HD.Pip01, ref_origin=end, offset = -0.5
+
+HD.Qua05: HD.Qua00, superimpose, ref = HD.Pip02, ref_origin=beginning, ele_origin=beginning, offset = HD.L2/4
+HD.Qua06: HD.Qua00, superimpose, ref = HD.Pip02
+HD.Qua07: HD.Qua00, superimpose, ref = HD.Pip02, ref_origin=end, ele_origin=end, offset = -HD.L2/4
+
+
+
+! Closed dispersion
+
+HD.QUA05[K1] = -1.33128710160107477E+001
+HD.QUA07[K1] = HD.QUA05[K1]
+
+! Matched Beta/Alpha
+
+
+
+HD.QUA04[K1] =  3.64898265761061680E+000
+HD.QUA06[K1] =  1.01225557417725405E+001
+
+
+HD.QUA01[K1] = -2.22328200157107396E+001
+HD.QUA02[K1] =  1.21608782664186190E+001
+HD.QUA02A[K1] = -4.30838776653201538E+000
+HD.QUA03[K1] = -3.90407945076536922E-001
+HD.QUA04[K1] =  9.47514059185825985E+000
+
+!---------------------
+! Lines
+
+HD: line = (HD.Mar.BEG,
+    HD.Pip01,
+    HD.Ben01, 
+    HD.Pip02, 
+    HD.Ben02,
+    HD.Mar.END)
+
+

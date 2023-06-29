@@ -1,0 +1,73 @@
+
+
+TA.bend_side = 0.254
+TA.angle1 = 20*pi/180 + 0.03218/2
+TA.angle2 = 20*pi/180
+TA.angle3 = pi 
+
+! Radii and Lengths for each bend
+TA.rho1 = TA.bend_side/sin(TA.angle1)
+TA.L1 = abs(TA.angle1*TA.rho1)
+
+TA.rho2 = TA.bend_side/sin(TA.angle2)
+TA.L2 = abs(TA.angle2*TA.rho2)
+
+TA.rho3 = 0.5
+TA.L3 = abs(TA.angle3*TA.rho3)
+
+TA.f1=0.5
+TA.s11=-1
+TA.s12=-1
+
+TA.f2=0.5
+TA.s21=1
+TA.s22=1
+
+TA.Ben01: sbend, fringe_type=full, e1 = TA.f1*TA.s11*TA.angle1, e2 = TA.f1*TA.s12*TA.angle1, g = 1/TA.rho1, L = TA.L1
+TA.Ben02: sbend, fringe_type=full, e1 = TA.f2*TA.s21*TA.angle2, e2 = TA.f2*TA.s22*TA.angle2, g = -1/TA.rho2, L = TA.L2
+!TA.Ben03H: sbend, fringe_type=full, e1 = 0, e2 = 0, g = 1/TA.rho2, L = TA.L2/2
+TA.Ben03: sbend, fringe_type=full, e1 = 0, e2 = 0, g = 1/TA.rho3, L = TA.L3
+
+TA.Ben04: sbend, fringe_type=full, e1 = TA.f2*TA.s21*TA.angle2, e2 = TA.f2*TA.s22*TA.angle2, g = -1/TA.rho2, L = TA.L2
+TA.Ben05: sbend, fringe_type=full, e1 = TA.f1*TA.s11*TA.angle1, e2 = TA.f1*TA.s12*TA.angle1, g = 1/TA.rho1, L = TA.L1
+
+
+TA.Mar.BEG: Marker
+TA.Mar.MID: Marker, superimpose, ref=TA.Ben03
+TA.Mar.END: Marker
+
+TA.Pip01: pipe, L = 0.5
+TA.Pip02: pipe, L = 1
+TA.Pip03: pipe, L = 0.5
+TA.Pip04: pipe, L = 0.5
+TA.Pip05: pipe, L = 1
+TA.Pip06: pipe, L = 0.5
+
+
+TA.Qua: quad, L = 0.2
+TA.Qua01: TA.Qua, superimpose, ref = TA.Pip01, ref_origin=end, ele_origin=end, offset=-0.1
+TA.Qua02: TA.Qua, superimpose, ref = TA.Pip02
+TA.Qua03: TA.Qua, superimpose, ref = TA.Pip03
+TA.Qua04: TA.Qua, superimpose, ref = TA.Pip04
+TA.Qua05: TA.Qua, superimpose, ref = TA.Pip05
+TA.Qua06: TA.Qua, superimpose, ref = TA.Pip06, ref_origin=beginning, ele_origin=beginning, offset=0.1
+
+TA: line = (TA.Mar.Beg,
+    TA.Pip01, TA.Ben01,
+    TA.Pip02, TA.Ben02,
+    TA.Pip03, TA.Ben03,    
+    TA.Pip04, TA.Ben04,    
+    TA.Pip05, TA.Ben05,    
+    TA.Pip06,
+    TA.Mar.END)
+
+
+! Symmetric solution
+TA.QUA01[K1] =  1.21008032878148675E+000
+
+TA.QUA02[K1] = -1.25582352446895786E+001
+TA.QUA03[K1] =  6.40160195429669621E+000
+
+TA.QUA04[K1] = TA.QUA03[K1]
+TA.QUA05[K1] = TA.QUA02[K1]
+TA.QUA06[K1] = TA.QUA01[K1]

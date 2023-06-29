@@ -1,0 +1,158 @@
+!---------------------
+!---------------------
+! C6
+! Cooling Section 6
+! Warning: This is a copy of C2, and is intended on being used reversed (-c6).
+! Do not hand-edit. 
+
+
+
+
+!---------------------
+! Geometry
+
+C6.angle0 = -3.21848730799674174E-002 ! Angle to make the shortest path
+C6.angle1 = -3 * pi/180   ! Additional demerge angle
+
+
+C6.L1 = 2.5
+
+!---------------------
+! Markers
+
+C6.Mar.BEG: marker
+C6.Mar.MID: marker, superimpose, ref = C6.Pip02
+C6.Mar.END: marker
+
+!---------------------
+! Pipes
+
+
+C6.Pip00: pipe
+
+C6.Pip01: C6.Pip00, L = C6.L1 
+C6.Pip02: C6.Pip00, L = 3
+C6.Pip03: C6.Pip00, L = C6.L1 
+C6.Pip04: C6.Pip00, L = 3
+
+! Makes path length correct
+C6.PIP04[L] =  2.84851742870933888E+000 
+
+!---------------------
+! Bends
+
+
+C6.Ben00: sbend, L  = 0.3, fringe_type = full
+
+C6.Ben01: C6.Ben00, angle = C6.angle0 + C6.angle1
+C6.Ben02: C6.Ben00, angle = -C6.angle1
+C6.Ben03: C6.Ben00, angle = C6.angle1
+C6.Ben04: C6.Ben00, angle = -C6.angle1 ! - C6.angle0 ! test
+
+
+
+!---------------------
+! Quads
+
+C6.Qua00: quad, L = 0.1
+
+C6.Qua01: C6.Qua00, superimpose, ref = C6.Pip01, offset = -C6.L1/4
+C6.Qua02: C6.Qua00, superimpose, ref = C6.Pip01, offset = 0
+C6.Qua03: C6.Qua00, superimpose, ref = C6.Pip01, offset = C6.L1/4
+
+C6.Qua04: C6.Qua00, superimpose, ref = C6.Pip02, offset = -1
+C6.Qua05: C6.Qua00, superimpose, ref = C6.Pip02, offset = 0
+C6.Qua06: C6.Qua00, superimpose, ref = C6.Pip02, offset = 1
+
+C6.Qua07: C6.Qua00, superimpose, ref = C6.Pip03, offset = -C6.L1/4
+C6.Qua08: C6.Qua00, superimpose, ref = C6.Pip03, offset = 0
+C6.Qua09: C6.Qua00, superimpose, ref = C6.Pip03, offset = C6.L1/4
+
+C6.Qua10: C6.Qua00, superimpose, ref = C6.Pip04, ref_origin = beginning, ele_origin=beginning, offset = 0.1
+C6.Qua11: C6.Qua00, superimpose, ref = C6.Pip04, offset = 0
+C6.Qua12: C6.Qua00, superimpose, ref = C6.Pip04, ref_origin = end, ele_origin=end, offset = -0.1
+
+
+
+C6.QUA01[K1] =  2.85548310761121975E+001
+C6.QUA02[K1] = -2.54848320556326513E+001
+C6.QUA03[K1] =  3.33731967012168411E+001
+C6.QUA04[K1] = -1.00599937182369743E+001
+C6.QUA05[K1] =  1.29712273457927978E+001
+C6.QUA06[K1] = -7.32928044205703344E+000
+C6.QUA07[K1] =  3.03843407149138969E+001
+C6.QUA08[K1] = -2.04050181809062146E+001
+C6.QUA09[K1] =  3.03843407149139075E+001
+C6.QUA10[K1] = -1.23477751484046667E+001
+C6.QUA11[K1] =  1.29298483467173391E+001
+C6.QUA12[K1] = -2.07451681821579399E+001
+
+!
+C6.QUA01[K1] =  2.86420943586671655E+001
+C6.QUA02[K1] = -2.18641458988387605E+001
+C6.QUA03[K1] =  3.46116054420331380E+001
+C6.QUA04[K1] = -8.79795786366612198E+000
+C6.QUA05[K1] =  1.31701274860175754E+001
+C6.QUA06[K1] = -5.07914014795352120E+000
+C6.QUA07[K1] =  3.14408708218115045E+001
+C6.QUA08[K1] = -2.03645381978510116E+001
+C6.QUA09[K1] =  2.90999308386318987E+001
+C6.QUA10[K1] = -1.08998710676041863E+001
+C6.QUA11[K1] =  1.24967579547040817E+001
+C6.QUA12[K1] = -2.60259135076364565E+001
+
+C6.QUA10[K1] = -1.19065984616477181E+001
+C6.QUA11[K1] =  1.14435877334007454E+001
+C6.QUA12[K1] = -1.15074477699460012E+001
+
+
+! symmetric first hal
+C6.QUA01[K1] =  1.43500985185206904E+001
+C6.QUA02[K1] =  4.33739975596584859E+000
+C6.QUA03[K1] = -1.33423484060984912E+001
+C6.QUA04[K1] =  1.00662628287799660E+000
+C6.QUA05[K1] =  3.20374440936708682E+000
+C6.QUA06[K1] = C6.QUA04[K1] 
+C6.QUA07[K1] = C6.QUA03[K1] 
+C6.QUA08[K1] = C6.QUA02[K1] 
+C6.QUA09[K1] = C6.QUA01[K1] 
+
+
+! non-symmatric r56=5 mm
+C6.QUA01[K1] =  9.47740836249283447E+000
+C6.QUA02[K1] =  4.93573268260302012E+000
+C6.QUA03[K1] = -1.09133703999194598E+001
+C6.QUA04[K1] =  1.06019648279369316E+000
+C6.QUA05[K1] =  3.57737798785055139E+000
+C6.QUA06[K1] =  4.84847762264694548E+000
+C6.QUA07[K1] = -1.09877631208574815E+001
+C6.QUA08[K1] =  3.37326045660666995E+000
+C6.QUA09[K1] =  1.98076086415380601E+001
+C6.QUA10[K1] = -1.17433411862717403E+001
+C6.QUA11[K1] =  1.21174052566526704E+001
+C6.QUA12[K1] = -1.45354994581745753E+001
+
+!---------------------
+! Overlays
+
+!O_C6.Qua01: overlay = {C6.Qua01, C6.Qua05}, k1
+!O_C6.Qua02: overlay = {C6.Qua02, C6.Qua04}, k1
+
+!O_C6.QUA01[K1] =  1.71652755917037929E+001
+!O_C6.QUA02[K1] = -1.59921763483422179E+001
+!C6.QUA03[K1] =  2.79920156551921302E+001
+
+!O_C6.QUA01[K1] =  1.71652755917038000E+001 ! fixes r56
+!O_C6.QUA02[K1] = -1.47366255124567385E+001
+!C6.QUA03[K1] =  2.77815583092579956E+001
+
+!---------------------
+! Lines
+
+
+C6: line = (C6.Mar.BEG,
+	C6.Ben01, C6.Pip01,
+	C6.Ben02, C6.Pip02,
+	C6.Ben03, C6.Pip03,
+	C6.Ben04, C6.Pip04,
+	C6.Mar.END)

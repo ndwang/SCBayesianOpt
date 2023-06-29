@@ -1,0 +1,61 @@
+beginning[beta_a] = 10
+beginning[beta_b] = 10
+
+beginning[alpha_a] =  0
+beginning[alpha_b] =  0
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 6e6 
+
+
+! Matches the beam
+BEGINNING[BETA_A] =  2.47747891739145221E+000
+BEGINNING[ALPHA_A] = -9.13776436286068638E-001
+BEGINNING[BETA_B] =  2.54833462585096981E+000
+BEGINNING[ALPHA_B] = -9.22918138154584677E-001
+
+
+call, file = mg.bmad
+call, file = ../la/la.bmad
+call, file = ../la/la.modea.bmad
+
+! p99: pipe, L = 1.150
+
+! Turn on RK
+lcavity::*[tracking_method] = runge_kutta
+lcavity::*[mat6_calc_method] = tracking
+
+
+!------------------
+! Second pass
+! 
+! fshift: floor_shift
+! fshift[z_offset] = -10
+! 
+! 
+! MG.Mar.END2: marker
+! multi_MG_part2: line[multipass] = (MG_part2)
+! connect: patch, flexible = T
+! LA_dummy: lcavity, L = 1, voltage = 150e6 - 2.5457372E+07 
+! match2: match, match_end_orbit = T
+! pipe2: pipe, L = 2.6811794E+00 + 1.9774916
+! qx: quad, L = 0.1
+! 
+! ! Connects
+! FSHIFT[X_OFFSET] =  2.81731683722755977E-002
+! FSHIFT[X_PITCH] = -5.82192180928331558E-003
+! 
+! lat2: line = (MG_part1, multi_MG_part2,  p99, LA.Cav, 
+! LA_dummy, fshift, pipe2, connect, 
+! multi_MG_part2, MG.Mar.END2)
+! 
+
+!use, lat2
+
+!call, file =  markers.bmad
+
+lat: line = (mg, LA.CRMOD01)
+
+use, lat

@@ -1,0 +1,82 @@
+no_digested
+beginning[beta_a] = 10
+beginning[beta_b] = 10
+
+beginning[e_tot] = 150e6
+
+parameter[particle] = electron
+parameter[geometry] = open
+parameter[absolute_time_tracking] = T
+!beginning[mode_flip] = T
+
+! Connects to the hadron ring
+BEGINNING[X_POSITION] =  1.94334624232703419E+001
+BEGINNING[Z_POSITION] =  2.01881228540878425E+002
+BEGINNING[THETA_POSITION] =  3.36474048772703105E+000
+
+call, file = cooler.bmad
+
+call, file = mg/mg.bmad 
+
+call, file = in/in.bmad
+
+call, file = la/la.bmad
+
+call, file = du/du.bmad
+
+!beginning[e_tot] = 6e6
+beginning[p0c] = 0
+
+
+! Faster for IN
+LCAVITY::IN.*[tracking_method] = bmad_standard
+LCAVITY::IN.*[mat6_calc_method] = bmad_standard
+!SOLENOID::IN.*[tracking_method] = bmad_standard
+!SOLENOID::IN.*[mat6_calc_method] = bmad_standard
+
+! Always use runge-kutta in LA
+LCAVITY::LA*[tracking_method]  = runge_kutta
+LCAVITY::LA*[mat6_calc_method] = tracking
+!LCAVITY::LA*[tracking_method]  = bmad_standard
+!LCAVITY::LA*[mat6_calc_method] = bmad_standard
+
+! Will match into linac
+IN.MAGIC: match, match_end = T
+IN.MAGIC[BETA_A1]  =   2.32671398766458459E+001
+IN.MAGIC[ALPHA_A1] = -7.83837929430402269E+000
+IN.MAGIC[BETA_B1]  =   3.35439670980374629E+001
+IN.MAGIC[ALPHA_B1] = -1.16065830115600921E+001
+
+
+erl.mar.beg: marker
+erl.mar.end: marker
+
+
+
+erl_part1: line = (erl.mar.beg,
+     in, 
+    mg_multi,
+    la_multi,
+    du.chicane, 
+    skeleton,
+    mh.connect, multi_MG_part2)
+
+erl: line = (erl.mar.beg,
+     in, 
+    mg_multi,
+    la_multi,
+    du.chicane, 
+    skeleton,
+    mh.connect, multi_MG_part2,
+    la_multi,
+    du,
+    erl.mar.end)
+
+!erl_beg: line = (in, mg)!, la)
+erl_beg: line = (in, IN.MAGIC, mg, la, hm, c1, c2, c3)
+
+
+use, erl
+!use, erl_beg
+
+

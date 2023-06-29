@@ -1,0 +1,68 @@
+beginning[beta_a] = 10
+beginning[beta_b] = 10
+
+beginning[alpha_a] =  0
+beginning[alpha_b] =  0
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 6e6 
+
+
+! Matches the beam
+BEGINNING[BETA_A] =  2.32671398766458459E+001
+BEGINNING[ALPHA_A] = -7.83837929430402269E+000
+BEGINNING[BETA_B] =  3.35439670980374629E+001
+BEGINNING[ALPHA_B] = -1.16065830115600921E+001
+
+
+! Makes mg.mar.end\1 x, z = 0
+BEGINNING[X_POSITION] =  7.81549444224355461E-001
+BEGINNING[Z_POSITION] = -6.88315102467845374E+000
+
+call, file = ../tb/tb.bmad
+call, file = ../mg/mg.bmad
+call, file = mh.bmad
+
+!------------------
+! Second pass
+! 
+fshift: floor_shift
+fshift[x_offset] = -2
+fshift[z_offset] = -10 -1 ! Account for LA_dummy
+fshift[x_pitch] = pi
+
+LA.mar.beg: marker
+LA_dummy: lcavity, L = 1, voltage = 150e6 - 6e6, rf_frequency = 591e6
+
+
+match2: match, match_end_orbit = T
+
+! Beginning of TB
+TB.MAGIC: match, match_end = T
+TB.MAGIC[beta_a1 ] =  23.45995893   
+TB.MAGIC[alpha_a1] =   8.94389205  
+TB.MAGIC[beta_b1 ] =   68.39747380
+TB.MAGIC[alpha_b1] =    60.77654379
+
+
+
+pipe2: pipe, L = 2.6811794E+00 + 1.9774916
+qx: quad, L = 0.1
+
+! Connects
+FSHIFT[X_OFFSET] = -1.86090240997957412E+000
+
+lat2: line = (MG_part1, multi_MG_part2, 
+LA_dummy, 
+fshift, 
+TB.MAGIC,
+TB,
+MH,
+MH.connect,
+multi_MG_part2)
+
+
+
+use, lat2

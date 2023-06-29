@@ -1,0 +1,22 @@
+beginning[beta_a] = 7
+beginning[beta_b] = 7
+beginning[alpha_a] = 0.33887518
+beginning[alpha_b] = 0.33887518
+
+beginning[e_tot] = 5.76e6
+
+parameter[particle] = electron
+
+parameter[geometry] = open
+
+call, file = ../cavity/cavity.bmad
+call, file = crmod.bmad
+
+lcavity::*[mat6_calc_method] = Tracking
+lcavity::*[tracking_method]= Runge_Kutta
+
+lat: line = (LA.CRMOD00)
+
+use, lat
+
+

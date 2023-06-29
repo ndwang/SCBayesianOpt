@@ -1,0 +1,43 @@
+beginning[beta_a] = 7
+beginning[beta_b] = 7
+beginning[alpha_a] = 0.33887518
+beginning[alpha_b] = 0.33887518
+
+beginning[e_tot] =6e6
+
+parameter[particle] = electron
+
+parameter[geometry] = open
+
+
+call, file = la.bmad
+
+call, file = la.modeb.bmad
+
+quad::*[b1_gradient] = 0.01
+
+
+!O_LA_Voltage: overlay = {
+! LA.CRMOD01.Cav01,
+! LA.CRMOD02.Cav01, 
+! LA.CRMOD03.Cav01, 
+! LA.CRMOD04.Cav01, 
+! ! Skip 3rd harmonic
+! LA.CRMOD06.Cav01, 
+! LA.CRMOD07.Cav01, 
+! LA.CRMOD08.Cav01, 
+! LA.CRMOD09.Cav01}, voltage = 19e6
+
+!! Turn on RK
+!LA.CRMOD01.Cav01[tracking_method] = runge_kutta
+!LA.CRMOD01.Cav01[mat6_calc_method] = tracking
+!LA.CRMOD01.Cav02[tracking_method] = runge_kutta
+!LA.CRMOD01.Cav02[mat6_calc_method] = tracking
+
+LCAVITY::LA*[tracking_method] = runge_kutta
+LCAVITY::LA*[mat6_calc_method] = tracking
+
+
+
+use, la
+!use, la_cell1

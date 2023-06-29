@@ -1,0 +1,124 @@
+!---------------------
+!---------------------
+! C1
+! Cooling Section 1
+
+!---------------------
+! Geometry
+C1.length =  39 ! 35 - .135 -.398
+
+
+!---------------------
+! Markers
+
+C1.Mar.BEG: marker
+C1.Mar.MID: marker, superimpose, ref = C1.Pip01
+C1.Mar.END: marker
+
+
+!---------------------
+! Pipes
+
+
+C1.Pip01: pipe, L = C1.length
+
+
+!---------------------
+! Quads
+
+C1.Qua00: quad, L = 0.1
+
+!C1.Qua01: C1.Qua00, superimpose, ref = C1.Pip01, ref_origin=beginning, offset = 1
+!C1.Qua02: C1.Qua00, superimpose, ref = C1.Pip01, ref_origin=beginning, offset = 1.5
+!
+!
+!C1.Qua03: C1.Qua00, superimpose, ref = C1.Pip01, ref_origin=end, offset = -1.5
+!C1.Qua04: C1.Qua00, superimpose, ref = C1.Pip01, ref_origin=end, offset = -1
+!
+!
+!C1.QUA01[K1] = -1.12486732776704699E+001
+!C1.QUA02[K1] =  1.06828548899943225E+001
+!
+!C1.QUA03[K1] =  1.02099410728868492E+001
+!C1.QUA04[K1] = -1.06713157923028827E+001
+
+!call, file= c1_fodo.bmad
+
+C1.Qua01: C1.Qua00, L = 0.100, 
+    superimpose, offset = 2.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua02: C1.Qua00, L = 0.100, 
+    superimpose, offset = 4.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua03: C1.Qua00, L = 0.100, 
+    superimpose, offset = 6.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua04: C1.Qua00, L = 0.100, 
+    superimpose, offset = 8.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua05: C1.Qua00, L = 0.100, 
+    superimpose, offset = 10.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua06: C1.Qua00, L = 0.100, 
+    superimpose, offset = 12.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua07: C1.Qua00, L = 0.100, 
+    superimpose, offset = 14.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua08: C1.Qua00, L = 0.100, 
+    superimpose, offset = 16.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua09: C1.Qua00, L = 0.100, 
+    superimpose, offset = 18.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua10: C1.Qua00, L = 0.100, 
+    superimpose, offset = 20.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua11: C1.Qua00, L = 0.100, 
+    superimpose, offset = 22.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua12: C1.Qua00, L = 0.100, 
+    superimpose, offset = 24.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua13: C1.Qua00, L = 0.100, 
+    superimpose, offset = 26.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua14: C1.Qua00, L = 0.100, 
+    superimpose, offset = 28.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua15: C1.Qua00, L = 0.100, 
+    superimpose, offset = 30.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua16: C1.Qua00, L = 0.100, 
+    superimpose, offset = 32.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua17: C1.Qua00, L = 0.100, 
+    superimpose, offset = 34.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+C1.Qua18: C1.Qua00, L = 0.100, 
+    superimpose, offset = 36.0, 
+    k1 = 5.142207882643613, ref=C1.Pip01, ref_origin=beginning
+C1.Qua19: C1.Qua00, L = 0.100, 
+    superimpose, offset = 38.0, 
+    k1 = -10.147564061731908, ref=C1.Pip01, ref_origin=beginning
+
+
+! Matche along with HM
+C1.QUA01[K1] = -7.16389475703855805E+000
+C1.QUA02[K1] =  5.86463413384684706E+000
+
+!
+!! Match into C2
+C1.QUA17[K1] = -8.59964789616885739E+000
+C1.QUA18[K1] =  5.81640181858820871E+000
+C1.QUA19[K1] = -7.56473242051006167E+000
+
+
+
+!---------------------
+! Lines
+ 
+
+C1: line = (C1.Mar.BEG,
+	C1.Pip01,
+	C1.Mar.END)

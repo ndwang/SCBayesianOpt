@@ -1,0 +1,36 @@
+
+parameter[particle] = proton
+parameter[E_tot] = 275.0 * 1e9
+
+
+! parameter[geometry] = open
+! beginning[beta_a] = 31.85940906
+! beginning[alpha_a] = 2.564980003
+! beginning[beta_b] =20.67251184
+! beginning[alpha_b] = -1.45437794
+! beginning[eta_x] = -0.002952952894
+! beginning[etap_x] = -0.01311790899
+
+call, file = hadron_ir2.bmad
+
+! Without a floor shift:
+! Tao> sho value ele::end[theta_position]
+!    -6.43787085262342157E-02
+
+
+sbend::*[fringe_type] = full
+
+beginning[theta_position] = 0.09543
+
+! For aligning with the cooler
+beginning[x_position] = -6.65224  
+beginning[z_position] = -156.40590 
+
+
+Mar.kick1: marker, superimpose, ref=clock2, offset=   253.583010 - 156.589605 - 4.51106 
+
+! Account for the symmetry, clockwise s
+Mar.START: marker, superimpose, offset =  258.109450
+
+
+use, ir2

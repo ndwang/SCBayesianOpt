@@ -1,0 +1,5 @@
+call, file = mh.lat.bmad
+call, file = mh.modeb.bmad
+
+
+LA_dummy[voltage] = 55e6-6e6

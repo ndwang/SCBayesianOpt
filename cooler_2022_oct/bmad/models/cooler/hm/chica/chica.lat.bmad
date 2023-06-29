@@ -1,0 +1,23 @@
+
+! makes twiss symmetric
+BEGINNING[BETA_A] =  1.16497939648317175E+001
+BEGINNING[ALPHA_A] =  4.06176558263981413E-001
+BEGINNING[BETA_B] =  1.62549607355024115E+001
+BEGINNING[ALPHA_B] =  6.07900226952263800E+000
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 55e6
+
+
+
+call, file = chica.bmad
+
+
+! r56 = 1.4 m
+O_HM.CHICA[ANGLE_DEG] = -3.51314620591782614E+001 
+O_HM.CHICA[ANGLE_DEG] = 0
+
+
+use, hm.chica

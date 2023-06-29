@@ -1,0 +1,15 @@
+call, file = hm.lat.bmad
+
+beginning[e_tot] = 55e6
+
+! Twiss at LA.Mar.END
+BEGINNING[BETA_A]  =      29.28719026  
+BEGINNING[ALPHA_A] =     -2.25937312  
+BEGINNING[BETA_B]  =     18.25649184 
+BEGINNING[ALPHA_B] =     -2.36603231 
+
+
+
+
+call, file = hm.modeb.bmad
+

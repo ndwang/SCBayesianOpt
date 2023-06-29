@@ -1,0 +1,26 @@
+! end of R3
+BEGINNING[BETA_A] =  1.66942851
+BEGINNING[ALPHA_A] = -0.63186316
+BEGINNING[BETA_B] =  0.67897745
+BEGINNING[ALPHA_B] = -1.14933725
+
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 150e6
+
+beginning[x_position] = 1.12419
+beginning[y_position] = 0.00000
+beginning[z_position] = 78.16906
+beginning[theta] = 0.02793
+
+
+call, file = r4.bmad
+call, file = "../../tb/tb.bmad"
+
+lat: line = (r4, tb)
+
+use, lat
+!use, r4
+

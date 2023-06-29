@@ -1,0 +1,30 @@
+beginning[beta_a] = 10
+beginning[beta_b] = 10
+
+beginning[alpha_a] =  0
+beginning[alpha_b] =  0
+
+parameter[geometry] = open
+parameter[particle] = electron
+
+beginning[e_tot] = 6e6 
+
+
+! Matches the beam
+BEGINNING[BETA_A] =  2.32671398766458459E+001
+BEGINNING[ALPHA_A] = -7.83837929430402269E+000
+BEGINNING[BETA_B] =  3.35439670980374629E+001
+BEGINNING[ALPHA_B] = -1.16065830115600921E+001
+
+
+call, file = mg.bmad
+call, file = ../la/la.bmad
+call, file = ../la/la.modeb.bmad
+
+! Turn on RK
+lcavity::*[tracking_method] = runge_kutta
+lcavity::*[mat6_calc_method] = tracking
+
+lat: line = (mg, LA.CRMOD01)
+
+use, lat

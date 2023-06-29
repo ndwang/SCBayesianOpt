@@ -1,0 +1,14 @@
+call, file = cooler.lat.bmad
+
+call, file = la/la.modeb.bmad
+call, file = hm/hm.modeb.bmad
+
+
+call, file = mh/mh.modeb.bmad
+
+BEGINNING[BETA_A] =  2.09831888831361786E-002
+BEGINNING[ALPHA_A] =  3.55632087721761414E-001
+BEGINNING[BETA_B] =  2.12584901557930257E-002
+BEGINNING[ALPHA_B] =  3.25718325342660264E-001
+
+use, erl_part1 ! exclude LA second pass for now

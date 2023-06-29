@@ -1,0 +1,114 @@
+
+!---------
+! TB
+! This is the same as TA with text replacement TA -> TB
+! and angle1 = angle2 (so complete turnaround is 180 deg)
+
+
+
+!---------
+! Geometry
+
+TB.bend_side = 0.254
+TB.angle1 = 20*pi/180
+TB.angle2 = 20*pi/180
+TB.angle3 = pi 
+
+! Radii and Lengths for each bend
+TB.rho1 = TB.bend_side/sin(TB.angle1)
+TB.L1 = abs(TB.angle1*TB.rho1)
+
+TB.rho2 = TB.bend_side/sin(TB.angle2)
+TB.L2 = abs(TB.angle2*TB.rho2)
+
+TB.rho3 = 0.5
+TB.L3 = abs(TB.angle3*TB.rho3)
+
+TB.f1=0.5
+TB.s11=-1
+TB.s12=-1
+
+TB.f2=0.5
+TB.s21=1
+TB.s22=1
+
+!---------
+! Bends
+
+TB.Ben01: sbend, fringe_type=full, e1 = TB.f1*TB.s11*TB.angle1, e2 = TB.f1*TB.s12*TB.angle1, g = 1/TB.rho1, L = TB.L1
+TB.Ben02: sbend, fringe_type=full, e1 = TB.f2*TB.s21*TB.angle2, e2 = TB.f2*TB.s22*TB.angle2, g = -1/TB.rho2, L = TB.L2
+!TB.Ben03H: sbend, fringe_type=full, e1 = 0, e2 = 0, g = 1/TB.rho2, L = TB.L2/2
+TB.Ben03: sbend, fringe_type=full, e1 = 0, e2 = 0, g = 1/TB.rho3, L = TB.L3
+
+TB.Ben04: sbend, fringe_type=full, e1 = TB.f2*TB.s21*TB.angle2, e2 = TB.f2*TB.s22*TB.angle2, g = -1/TB.rho2, L = TB.L2
+TB.Ben05: sbend, fringe_type=full, e1 = TB.f1*TB.s11*TB.angle1, e2 = TB.f1*TB.s12*TB.angle1, g = 1/TB.rho1, L = TB.L1
+
+
+TB.Mar.BEG: Marker
+TB.Mar.MID: Marker, superimpose, ref=TB.Ben03
+TB.Mar.END: Marker
+
+!---------
+! Pipes
+
+TB.Sli01: pipe, L= 0.3
+TB.Sli02: pipe, L= 0.3
+
+TB.Pip01: pipe, L = 0.5
+TB.Pip02: pipe, L = 1
+TB.Pip03: pipe, L = 0.5
+TB.Pip04: pipe, L = 0.5
+TB.Pip05: pipe, L = 1
+TB.Pip06: pipe, L = 0.5
+
+!---------
+! Quads
+
+TB.Qua: quad, L = 0.2
+TB.Qua01: TB.Qua, superimpose, ref = TB.Pip01, ref_origin=end, ele_origin=end, offset=-0.2
+TB.Qua02: TB.Qua, superimpose, ref = TB.Pip02
+TB.Qua03: TB.Qua, superimpose, ref = TB.Pip03
+TB.Qua04: TB.Qua, superimpose, ref = TB.Pip04
+TB.Qua05: TB.Qua, superimpose, ref = TB.Pip05
+TB.Qua06: TB.Qua, superimpose, ref = TB.Pip06, ref_origin=beginning, ele_origin=beginning, offset=0.2
+
+TB: line = (TB.Mar.Beg,
+    TB.Sli01,
+    TB.Pip01, TB.Ben01,
+    TB.Pip02, TB.Ben02,
+    TB.Pip03, TB.Ben03,    
+    TB.Pip04, TB.Ben04,    
+    TB.Pip05, TB.Ben05,    
+    TB.Pip06,
+    TB.Sli02,
+    TB.Mar.END)
+
+
+!---------
+! Overlays
+
+O_TB_Sli: overlay = {TB.Sli01, TB.Sli02}, L = 0.3 + .203/2 ! Energy recovery distance
+
+
+!---------
+! Settings
+
+
+! Symmetric solution
+
+! (from r4 match)
+TB.QUA01[K1] = -1.27072487685712310E+000
+
+TB.QUA02[K1] = -1.34888937321246019E+001
+TB.QUA03[K1] =  6.49315218572189767E+000
+
+TB.QUA04[K1] = TB.QUA03[K1]
+TB.QUA05[K1] = TB.QUA02[K1]
+!TB.QUA06[K1] = TB.QUA01[K1]
+
+! Tuned to match into MH 
+TB.QUA06[K1] =  2.07481639832905795E+000
+
+
+
+
