@@ -1,0 +1,24 @@
+xopt: {asynch: true, strict: false, dump_file: dump.yaml, max_evaluations: 800}
+generator: {name: cnsga, population_size: 16, crossover_probability: 0.9, mutation_probability: 1.0,
+  population_file: null, output_path: temp}
+evaluator:
+  function: shaping.evaluate_splice_flat
+  max_workers: 1
+  function_kwargs: {}
+  vectorized: false
+vocs:
+  variables:
+    p1: [0.0, 1.0]
+    p2: [0.0, 1.0]
+    p3: [0.0, 1.0]
+    p4: [0.0, 1.0]
+    p5: [0.0, 1.0]
+    p6: [0.0, 1.0]
+    p7: [0.0, 1.0]
+    p8: [0.0, 1.0]
+    sig_t: [0.01, 0.1]
+  constraints:
+    n_alive: [GREATER_THAN, 8000.0]
+  objectives: {current: MINIMIZE, slice_pz: MINIMIZE, slice_emit_x: MINIMIZE}
+  constants: {}
+  linked_variables: {}

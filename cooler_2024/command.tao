@@ -1,0 +1,7 @@
+set beam_init n_particle = 10000
+set ele IN.CAV03 phi0 = 0.5101494851
+set global track_type = beam
+write beam -at MARKER::*.END opt_inj_10k.h5
+!write bunch_comb -cent 100k.centroid
+!write bunch_comb -sig 100k.sigma
+exit

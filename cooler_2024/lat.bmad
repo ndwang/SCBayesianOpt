@@ -1,0 +1,500 @@
+parameter[geometry] = Open            
+
+parameter[p0c]                      = 0
+parameter[particle]                 = Electron
+bmad_com[csr_and_space_charge_on] = T
+bmad_com[absolute_time_tracking] = T
+space_charge_com[dt_track_step] = 5E-13
+space_charge_com[rel_tol_tracking] = 0.01
+space_charge_com[space_charge_mesh_size] = (32,32,32)
+
+beginning[beta_a]    = 10
+beginning[beta_b]    = 10
+
+
+!-------------------------------------------------------
+
+IN.MAR.BEG: Marker, mat6_calc_method = Tracking
+slave_drift_0_2: drift, l = 0.0382
+slave_drift_0_3: drift, l = 0.1118
+slave_drift_0_4: drift, l = 0.4882
+IN.SOL02: Solenoid, grid_field = call::in.sol02.grid_field.h5, L = 0.6, BS_FIELD = 0.032367989728336,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+IN.PIP01#1: Drift, L = 0.1257, mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+IN.CAV01: Lcavity, grid_field = call::in.cav01.grid_field.h5, L = 0.5, GRADIENT = 2,
+   RF_FREQUENCY = 1.97E8, AUTOSCALE_AMPLITUDE = F, PHI0 = -0.01058850293845,
+   PHI0_AUTOSCALE = 0.32597964840784, FIELD_AUTOSCALE = 2.862795376524E6, mat6_calc_method = Tracking,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D, field_calc = FieldMap
+IN.PIP01#2: Drift, L = 0.2361, mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+IN.CAV02: Lcavity, grid_field = call::in.cav02.grid_field.h5, L = 0.5, GRADIENT = 2,
+   RF_FREQUENCY = 1.97E8, AUTOSCALE_AMPLITUDE = F, PHI0 = 0.01731647574995,
+   PHI0_AUTOSCALE = 0.32197764956439, FIELD_AUTOSCALE = 2.862795376524E6, mat6_calc_method = Tracking,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D, field_calc = FieldMap
+IN.PIP01#3: Drift, L = 0.264, mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+IN.CAV03: Lcavity, grid_field = call::in.cav03.grid_field.h5, L = 0.7, RF_FREQUENCY = 5.91E8,
+   AUTOSCALE_AMPLITUDE = F, PHI0 = 0.5176315035528, PHI0_AUTOSCALE = 0.76319520404534,
+   FIELD_AUTOSCALE = 0.18197233309828, mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D, field_calc = FieldMap
+IN.PIP01#4: Drift, L = 0.436, mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+IN.MAR.END: Marker, mat6_calc_method = Tracking
+MG.MAR.BEG: Marker, aperture = 0.03
+slave_drift_0_15: drift, l = 0.225
+slave_drift_0_16: drift, l = 0.5
+slave_drift_0_17: drift, l = 0.025
+MG.SPACER1: Drift, L = 0.25, DS_STEP = 0.5, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+slave_drift_0_19: drift, l = 0.025
+slave_drift_0_20: drift, l = 0.5
+slave_drift_0_21: drift, l = 0.225
+MG.SPACER2: Drift, L = 0.15, DS_STEP = 0.5, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+MG.MAR.BEGBEND: Marker, aperture = 0.03
+MG.BEN01: Sbend, L = 0.3, G = -0.87266462599716, FRINGE_TYPE = Full, E1 = -0.065449846949787,
+   E2 = -0.065449846949787, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+slave_drift_0_25: drift, l = 0.8
+slave_drift_0_26: drift, l = 0.5
+slave_drift_0_27: drift, l = 0.8
+MG.MAR.MID: Marker, aperture = 0.03
+slave_drift_0_29: drift, l = 0.8
+slave_drift_0_30: drift, l = 0.5
+slave_drift_0_31: drift, l = 0.8
+MG.BEN02: Sbend, L = 0.3, G = 0.87266462599716, FRINGE_TYPE = Full, E1 = 0.065449846949787,
+   E2 = 0.065449846949787, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+slave_drift_0_33: drift, l = 0.35
+slave_drift_0_34: drift, l = 0.5
+slave_drift_0_35: drift, l = 0.15
+MG.MAR.END: Marker, aperture = 0.03
+PL.MAR.BEG: Marker
+PL.CM1.MAR.BEG: Marker
+PL.CM1.GAT01: Instrument, L = 0.1, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+PL.CM1.PIP01: Pipe, L = 0.357125, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM1.CAV01: Lcavity, grid_field = call::pl.cm1.cav01.grid_field.h5, L = 0.5,
+   GRADIENT = 4.3508201323515E6, RF_FREQUENCY = 1.97E8, PHI0 = -0.069861111111111,
+   PHI0_AUTOSCALE = 0.34753519091795, FIELD_AUTOSCALE = 2.1757139073266E6, aperture = 0.03,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+PL.CM1.PIP02: Pipe, L = 0.2361, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM1.CAV02: Lcavity, grid_field = call::pl.cm1.cav02.grid_field.h5, L = 0.5,
+   GRADIENT = 4.3508201323515E6, RF_FREQUENCY = 1.97E8, PHI0 = -0.069861111111111,
+   PHI0_AUTOSCALE = 0.3230433163659, FIELD_AUTOSCALE = 2.1755971253545E6, aperture = 0.03,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+PL.CM1.PIP03: Pipe, L = 0.25, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM1.CAV03: Lcavity, grid_field = call::pl.cm1.cav03.grid_field.h5, L = 0.7,
+   GRADIENT = 690606.37021453, RF_FREQUENCY = 5.91E8, PHI0 = 0.43013888888889,
+   PHI0_AUTOSCALE = 0.76461169296952, FIELD_AUTOSCALE = 0.14373786427608, aperture = 0.03,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+PL.CM1.PIP04: Pipe, L = 0.357125, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM1.GAT02: Instrument, L = 0.1, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+PL.CM1.MAR.END: Marker
+PL.PIP.C2C: Pipe, L = -0.21425, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM2.MAR.BEG: Marker
+PL.CM2.GAT01: Instrument, L = 0.1, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+PL.CM2.PIP01: Pipe, L = 0.357125, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM2.CAV01: Lcavity, grid_field = call::pl.cm1.cav03.grid_field.h5, L = 0.7,
+   GRADIENT = 690606.37021453, RF_FREQUENCY = 5.91E8, PHI0 = 0.43013888888889,
+   PHI0_AUTOSCALE = -0.23572085901674, FIELD_AUTOSCALE = 0.14375970942453, aperture = 0.03,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+PL.CM2.PIP02: Pipe, L = 0.2361, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM2.CAV02: Lcavity, grid_field = call::pl.cm1.cav02.grid_field.h5, L = 0.5,
+   GRADIENT = 4.3508201323515E6, RF_FREQUENCY = 1.97E8, PHI0 = -0.069861111111111,
+   PHI0_AUTOSCALE = 0.32321394649696, FIELD_AUTOSCALE = 2.1755588677155E6, aperture = 0.03,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+PL.CM2.PIP03: Pipe, L = 0.25, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM2.CAV03: Lcavity, grid_field = call::pl.cm1.cav01.grid_field.h5, L = 0.5,
+   GRADIENT = 4.3508201323515E6, RF_FREQUENCY = 1.97E8, PHI0 = -0.069861111111111,
+   PHI0_AUTOSCALE = 0.34794660794491, FIELD_AUTOSCALE = 2.1755118826103E6, aperture = 0.03,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+PL.CM2.PIP04: Pipe, L = 0.357125, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM2.GAT02: Instrument, L = 0.1, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+PL.CM2.MAR.END: Marker
+slave_drift_0_61: drift, l = 0.2
+slave_drift_0_62: drift, l = 0.1
+slave_drift_0_63: drift, l = 0.1
+slave_drift_0_64: drift, l = 0.2
+slave_drift_0_65: drift, l = 0.099999999999998
+slave_drift_0_66: drift, l = 0.1
+slave_drift_0_67: drift, l = 0.2
+PL.CM3_DUMMY: Pipe, L = 3.10035, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.CM4_DUMMY: Pipe, L = 3.10035, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+slave_drift_0_70: drift, l = 0.2
+slave_drift_0_71: drift, l = 0.1
+slave_drift_0_72: drift, l = 0.1
+slave_drift_0_73: drift, l = 0.2
+slave_drift_0_74: drift, l = 0.099999999999998
+slave_drift_0_75: drift, l = 0.1
+slave_drift_0_76: drift, l = 0.2
+PL.DUMP_DUMMY: Pipe, L = 4.5, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+slave_drift_0_78: drift, l = 0.2
+slave_drift_0_79: drift, l = 0.1
+slave_drift_0_80: drift, l = 0.1
+slave_drift_0_81: drift, l = 0.2
+slave_drift_0_82: drift, l = 0.099999999999994
+slave_drift_0_83: drift, l = 0.1
+slave_drift_0_84: drift, l = 0.2
+PL.MAR.END: Marker
+PX.MAR.BEG: Marker
+PX.BEN01: Sbend, L = 0.30426509400236, G = 0.95516600855955, FRINGE_TYPE = Full, E2 = 0.29062367538223
+PX.MAR.PIP01: Marker
+PX.PIP01: Pipe, L = 4.1750805508205
+PX.BEN02: Sbend, L = 0.30426509400236, G = -0.95516600855955, FRINGE_TYPE = Full, E1 = -0.29062367538223
+slave_drift_0_91: drift, l = 0.4
+PX.MAR.MID: Marker
+slave_drift_0_93: drift, l = 0.4
+PX.BEN03: Sbend, L = 0.30426509400236, G = -0.95516600855955, FRINGE_TYPE = Full, E2 = -0.29062367538223
+PX.PIP03: Pipe, L = 4.1750805508205
+PX.BEN04: Sbend, L = 0.30426509400236, G = 0.95516600855955, FRINGE_TYPE = Full, E1 = 0.29062367538223
+PX.MAR.END: Marker
+slave_drift_0_98: drift, l = 0.1
+slave_drift_0_99: drift, l = 0.2
+slave_drift_0_100: drift, l = 0.6
+slave_drift_0_101: drift, l = 0.2
+slave_drift_0_102: drift, l = 0.6
+slave_drift_0_103: drift, l = 0.2
+slave_drift_0_104: drift, l = 0.099999999999987
+LA.MAR.BEG: Marker
+LA.CRMOD01.MAR.BEG: Marker
+LA.CRMOD01.GAT01: Instrument, L = 0.1
+LA.CRMOD01.PIP01: Pipe, L = 1.58425
+LA.CRMOD01.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -7.5356954012587E-4, FIELD_AUTOSCALE = 1.000269951478,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD01.PIP02: Pipe, L = 1.58425
+LA.CRMOD01.GAT02: Instrument, L = 0.1
+LA.CRMOD01.MAR.END: Marker
+slave_drift_0_113: drift, l = 0.19999999999999
+slave_drift_0_114: drift, l = 0.1
+slave_drift_0_115: drift, l = 0.10000000000001
+slave_drift_0_116: drift, l = 0.2
+slave_drift_0_117: drift, l = 0.099999999999987
+slave_drift_0_118: drift, l = 0.1
+slave_drift_0_119: drift, l = 0.2
+LA.CRMOD02.MAR.BEG: Marker
+LA.CRMOD02.GAT01: Instrument, L = 0.1
+LA.CRMOD02.PIP01: Pipe, L = 1.58425
+LA.CRMOD02.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -3.8076986415113E-4, FIELD_AUTOSCALE = 1.0001401387002,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD02.PIP02: Pipe, L = 1.58425
+LA.CRMOD02.GAT02: Instrument, L = 0.1
+LA.CRMOD02.MAR.END: Marker
+LA.CRMOD03.MAR.BEG: Marker
+LA.CRMOD03.GAT01: Instrument, L = 0.1
+LA.CRMOD03.PIP01: Pipe, L = 1.58425
+LA.CRMOD03.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -2.2952774990148E-4, FIELD_AUTOSCALE = 1.0000858725568,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD03.PIP02: Pipe, L = 1.58425
+LA.CRMOD03.GAT02: Instrument, L = 0.1
+LA.CRMOD03.MAR.END: Marker
+slave_drift_0_134: drift, l = 0.2
+slave_drift_0_135: drift, l = 0.1
+slave_drift_0_136: drift, l = 0.1
+slave_drift_0_137: drift, l = 0.2
+slave_drift_0_138: drift, l = 0.099999999999994
+slave_drift_0_139: drift, l = 0.1
+slave_drift_0_140: drift, l = 0.19999999999999
+LA.CRMOD04.MAR.BEG: Marker
+LA.CRMOD04.GAT01: Instrument, L = 0.1
+LA.CRMOD04.PIP01: Pipe, L = 1.58425
+LA.CRMOD04.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -1.5340851786932E-4, FIELD_AUTOSCALE = 1.00005803037,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD04.PIP02: Pipe, L = 1.58425
+LA.CRMOD04.GAT02: Instrument, L = 0.1
+LA.CRMOD04.MAR.END: Marker
+LA.MARH.BEG: Marker
+LA.CRMOD05.MAR.BEG: Marker
+LA.CRMOD05.GAT01: Instrument, L = 0.1
+LA.CRMOD05.PIP01: Pipe, L = 0.59
+LA.CRMOD05.CAV01: Lcavity, L = 0.62, GRADIENT = 2.3191392587148E6, RF_FREQUENCY = 1.773E9,
+   PHI0 = 0.51353888888889, PHI0_AUTOSCALE = -1.1845891663338E-4, FIELD_AUTOSCALE = 1.0000468137152,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta
+LA.CRMOD05.PIP02: Pipe, L = 0.38
+LA.CRMOD05.CAV02: Lcavity, L = 0.62, GRADIENT = 2.3191392587148E6, RF_FREQUENCY = 1.773E9,
+   PHI0 = 0.51353888888889, PHI0_AUTOSCALE = -1.2801471963288E-4, FIELD_AUTOSCALE = 1.000050628787,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta
+LA.CRMOD05.PIP03: Pipe, L = 0.59
+LA.CRMOD05.GAT02: Instrument, L = 0.1
+LA.CRMOD05.MAR.END: Marker
+LA.CRMOD06.MAR.BEG: Marker
+LA.CRMOD06.GAT01: Instrument, L = 0.1
+LA.CRMOD06.PIP01: Pipe, L = 0.59
+LA.CRMOD06.CAV01: Lcavity, L = 0.62, GRADIENT = 2.3191392587148E6, RF_FREQUENCY = 1.773E9,
+   PHI0 = 0.51353888888889, PHI0_AUTOSCALE = -1.3894067882292E-4, FIELD_AUTOSCALE = 1.0000549300094,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta
+LA.CRMOD06.PIP02: Pipe, L = 0.38
+LA.CRMOD06.CAV02: Lcavity, L = 0.62, GRADIENT = 2.3191392587148E6, RF_FREQUENCY = 1.773E9,
+   PHI0 = 0.51353888888889, PHI0_AUTOSCALE = -1.512771775448E-4, FIELD_AUTOSCALE = 1.0000598044591,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta
+LA.CRMOD06.PIP03: Pipe, L = 0.59
+LA.CRMOD06.GAT02: Instrument, L = 0.1
+LA.CRMOD06.MAR.END: Marker
+LA.MARH.END: Marker
+LA.CRMOD07.MAR.BEG: Marker
+LA.MAR.MID: Marker
+LA.CRMOD07.GAT01: Instrument, L = 0.1
+LA.CRMOD07.PIP01: Pipe, L = 1.58425
+LA.CRMOD07.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -1.5153639509011E-4, FIELD_AUTOSCALE = 1.0000573397447,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD07.PIP02: Pipe, L = 1.58425
+LA.CRMOD07.GAT02: Instrument, L = 0.1
+LA.CRMOD07.MAR.END: Marker
+slave_drift_0_176: drift, l = 0.2
+slave_drift_0_177: drift, l = 0.1
+slave_drift_0_178: drift, l = 0.099999999999994
+slave_drift_0_179: drift, l = 0.2
+slave_drift_0_180: drift, l = 0.10000000000001
+slave_drift_0_181: drift, l = 0.1
+slave_drift_0_182: drift, l = 0.2
+LA.CRMOD08.MAR.BEG: Marker
+LA.CRMOD08.GAT01: Instrument, L = 0.1
+LA.CRMOD08.PIP01: Pipe, L = 1.58425
+LA.CRMOD08.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -1.0910757682848E-4, FIELD_AUTOSCALE = 1.0000414229537,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD08.PIP02: Pipe, L = 1.58425
+LA.CRMOD08.GAT02: Instrument, L = 0.1
+LA.CRMOD08.MAR.END: Marker
+LA.CRMOD09.MAR.BEG: Marker
+LA.CRMOD09.GAT01: Instrument, L = 0.1
+LA.CRMOD09.PIP01: Pipe, L = 1.58425
+LA.CRMOD09.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -8.1668809797202E-5, FIELD_AUTOSCALE = 1.0000313280176,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD09.PIP02: Pipe, L = 1.58425
+LA.CRMOD09.GAT02: Instrument, L = 0.1
+LA.CRMOD09.MAR.END: Marker
+slave_drift_0_197: drift, l = 0.2
+slave_drift_0_198: drift, l = 0.1
+slave_drift_0_199: drift, l = 0.099999999999994
+slave_drift_0_200: drift, l = 0.2
+slave_drift_0_201: drift, l = 0.10000000000001
+slave_drift_0_202: drift, l = 0.1
+slave_drift_0_203: drift, l = 0.2
+LA.CRMOD10.MAR.BEG: Marker
+LA.CRMOD10.GAT01: Instrument, L = 0.1
+LA.CRMOD10.PIP01: Pipe, L = 1.58425
+LA.CRMOD10.CAV01: Lcavity, L = 1.86, GRADIENT = 3.2002229850064E6, RF_FREQUENCY = 5.91E8,
+   PHI0 = 0.013538888888889, PHI0_AUTOSCALE = -6.3638906042319E-5, FIELD_AUTOSCALE = 1.0000245234695,
+   N_CELL = 5, mat6_calc_method = Tracking, tracking_method = Runge_Kutta, field_master = T
+LA.CRMOD10.PIP02: Pipe, L = 1.58425
+LA.CRMOD10.GAT02: Instrument, L = 0.1
+LA.CRMOD10.MAR.END: Marker
+LA.MAR.END: Marker
+IN.GUN01: E_Gun, grid_field = call::in.gun01.grid_field.h5, L = 0.15, GRADIENT = 2.6666666666667E6,
+   VOLTAGE = 400000.00000001, AUTOSCALE_PHASE = F, mat6_calc_method = Tracking,
+   space_charge_method = Cathode_FFT_3D, field_calc = FieldMap
+IN.SOL01: Solenoid, grid_field = call::in.sol02.grid_field.h5, L = 0.6, BS_FIELD = 0.03143559071451,
+   mat6_calc_method = Tracking, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D,
+   field_calc = FieldMap, field_master = T
+MG.PIP02: Pipe, L = 4.2, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+MG.SOL01: Solenoid, L = 0.5, KS = 4.0934817989941, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+MG.SOL02: Solenoid, L = 0.5, KS = -4.0934817989941, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+MG.PIP01A: Pipe, L = 0.75, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+MG.SOLX1: Solenoid, L = 0.5, BS_FIELD = 0.056873447974618, aperture = 0.03,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D, field_master = T
+MG.PIP01B: Pipe, L = 0.75, aperture = 0.03, tracking_method = Time_Runge_Kutta,
+   space_charge_method = FFT_3D
+MG.SOLX2: Solenoid, L = 0.5, BS_FIELD = 0.025386841274051, aperture = 0.03,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D, field_master = T
+MG.PIP03: Pipe, L = 1, aperture = 0.03, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+MG.SOLX3: Solenoid, L = 0.5, BS_FIELD = 0.080119164366743, aperture = 0.03,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D, field_master = T
+PL.PIP01: Pipe, L = 1, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF1.QUA01: Quadrupole, L = 0.1, K1 = 4.3719519302514, DS_STEP = 0.1,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF1.QUA02: Quadrupole, L = 0.2, K1 = -4.3719519302514, DS_STEP = 0.2,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF1.QUA03: Quadrupole, L = 0.1, K1 = 4.3719519302514, DS_STEP = 0.1,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.PIP02: Pipe, L = 1, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF2.QUA01: Quadrupole, L = 0.1, K1 = -3.2562183971643, DS_STEP = 0.1,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF2.QUA02: Quadrupole, L = 0.2, K1 = 3.2562183971643, DS_STEP = 0.2,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF2.QUA03: Quadrupole, L = 0.1, K1 = -3.2562183971643, DS_STEP = 0.1,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.PIP03: Pipe, L = 1, tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF3.QUA01: Quadrupole, L = 0.1, K1 = 1.7749990871934, DS_STEP = 0.1,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF3.QUA02: Quadrupole, L = 0.2, K1 = -1.7749990871934, DS_STEP = 0.2,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PL.TF3.QUA03: Quadrupole, L = 0.1, K1 = 1.7749990871934, DS_STEP = 0.1,
+   tracking_method = Time_Runge_Kutta, space_charge_method = FFT_3D
+PX.PIP02: Pipe, L = 0.8
+PX.PIP04: Pipe, L = 2
+PX.QUA01: Quadrupole, L = 0.2, K1 = 2.1557858376992
+PX.QUA02: Quadrupole, L = 0.2, K1 = -1.6630475848095
+PX.QUA03: Quadrupole, L = 0.2, K1 = -0.49318231149512
+LA.PIP01: Pipe, L = 0.99999999999998
+LA.TF1.QUA01: Quadrupole, L = 0.1, K1 = 8.0999455581506, DS_STEP = 0.1
+LA.TF1.QUA02: Quadrupole, L = 0.2, K1 = -8.0999455581506, DS_STEP = 0.2
+LA.TF1.QUA03: Quadrupole, L = 0.1, K1 = 8.0999455581506, DS_STEP = 0.1
+LA.PIP02: Pipe, L = 0.99999999999998
+LA.TF2.QUA01: Quadrupole, L = 0.1, K1 = -6.105638359399, DS_STEP = 0.1
+LA.TF2.QUA02: Quadrupole, L = 0.2, K1 = 6.105638359399, DS_STEP = 0.2
+LA.TF2.QUA03: Quadrupole, L = 0.1, K1 = -6.105638359399, DS_STEP = 0.1
+LA.PIP03: Pipe, L = 1
+LA.TF3.QUA01: Quadrupole, L = 0.1, K1 = -5.0916386205359, DS_STEP = 0.1
+LA.TF3.QUA02: Quadrupole, L = 0.2, K1 = 5.0916386205359, DS_STEP = 0.2
+LA.TF3.QUA03: Quadrupole, L = 0.1, K1 = -5.0916386205359, DS_STEP = 0.1
+LA.PIP04: Pipe, L = 1
+LA.TF4.QUA01: Quadrupole, L = 0.1, K1 = 3.1423279773248, DS_STEP = 0.1
+LA.TF4.QUA02: Quadrupole, L = 0.2, K1 = -3.1423279773248, DS_STEP = 0.2
+LA.TF4.QUA03: Quadrupole, L = 0.1, K1 = 3.1423279773248, DS_STEP = 0.1
+
+!-------------------------------------------------------
+! Overlays, groups, rampers, and superimpose
+
+superimpose, element = IN.GUN01, ref = slave_drift_0_2, offset = 0.0559
+superimpose, element = IN.SOL01, ref = slave_drift_0_3, offset = 0.2441
+superimpose, element = MG.PIP02, ref = slave_drift_0_25, offset = 1.7
+superimpose, element = MG.SOL01, ref = slave_drift_0_26, offset = 0
+superimpose, element = MG.SOL02, ref = slave_drift_0_30, offset = 0
+superimpose, element = MG.PIP01A, ref = slave_drift_0_15, offset = 0.2625
+superimpose, element = MG.SOLX1, ref = slave_drift_0_16, offset = 0
+superimpose, element = MG.PIP01B, ref = slave_drift_0_19, offset = 0.3625
+superimpose, element = MG.SOLX2, ref = slave_drift_0_20, offset = 0
+superimpose, element = MG.PIP03, ref = slave_drift_0_33, offset = 0.325
+superimpose, element = MG.SOLX3, ref = slave_drift_0_34, offset = 0
+superimpose, element = PL.PIP01, ref = slave_drift_0_61, offset = 0.4
+superimpose, element = PL.TF1.QUA01, ref = slave_drift_0_62, offset = 0
+superimpose, element = PL.TF1.QUA02, ref = slave_drift_0_64, offset = 0
+superimpose, element = PL.TF1.QUA03, ref = slave_drift_0_66, offset = 0
+superimpose, element = PL.PIP02, ref = slave_drift_0_70, offset = 0.4
+superimpose, element = PL.TF2.QUA01, ref = slave_drift_0_71, offset = 0
+superimpose, element = PL.TF2.QUA02, ref = slave_drift_0_73, offset = 0
+superimpose, element = PL.TF2.QUA03, ref = slave_drift_0_75, offset = 0
+superimpose, element = PL.PIP03, ref = slave_drift_0_78, offset = 0.4
+superimpose, element = PL.TF3.QUA01, ref = slave_drift_0_79, offset = 0
+superimpose, element = PL.TF3.QUA02, ref = slave_drift_0_81, offset = 0
+superimpose, element = PL.TF3.QUA03, ref = slave_drift_0_83, offset = 0
+superimpose, element = PX.PIP02, ref = slave_drift_0_91, offset = 0.2
+superimpose, element = PX.PIP04, ref = slave_drift_0_98, offset = 0.94999999999999
+superimpose, element = PX.QUA01, ref = slave_drift_0_99, offset = 0
+superimpose, element = PX.QUA02, ref = slave_drift_0_101, offset = 0
+superimpose, element = PX.QUA03, ref = slave_drift_0_103, offset = 0
+superimpose, element = LA.PIP01, ref = slave_drift_0_113, offset = 0.4
+superimpose, element = LA.TF1.QUA01, ref = slave_drift_0_114, offset = 0
+superimpose, element = LA.TF1.QUA02, ref = slave_drift_0_116, offset = 0
+superimpose, element = LA.TF1.QUA03, ref = slave_drift_0_118, offset = 0
+superimpose, element = LA.PIP02, ref = slave_drift_0_134, offset = 0.39999999999999
+superimpose, element = LA.TF2.QUA01, ref = slave_drift_0_135, offset = 0
+superimpose, element = LA.TF2.QUA02, ref = slave_drift_0_137, offset = 0
+superimpose, element = LA.TF2.QUA03, ref = slave_drift_0_139, offset = 0
+superimpose, element = LA.PIP03, ref = slave_drift_0_176, offset = 0.4
+superimpose, element = LA.TF3.QUA01, ref = slave_drift_0_177, offset = 0
+superimpose, element = LA.TF3.QUA02, ref = slave_drift_0_179, offset = 0
+superimpose, element = LA.TF3.QUA03, ref = slave_drift_0_181, offset = 0
+superimpose, element = LA.PIP04, ref = slave_drift_0_197, offset = 0.4
+superimpose, element = LA.TF4.QUA01, ref = slave_drift_0_198, offset = 0
+superimpose, element = LA.TF4.QUA02, ref = slave_drift_0_200, offset = 0
+superimpose, element = LA.TF4.QUA03, ref = slave_drift_0_202, offset = 0
+O_PL.TF1: overlay = {PL.TF1.QUA01: -b1_gradient*(1+trim), PL.TF1.QUA02: b1_gradient,
+   PL.TF1.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = 0.18946120661244
+O_PL.TF2: overlay = {PL.TF2.QUA01: -b1_gradient*(1+trim), PL.TF2.QUA02: b1_gradient,
+   PL.TF2.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = -0.14111021263788
+O_PL.TF3: overlay = {PL.TF3.QUA01: -b1_gradient*(1+trim), PL.TF3.QUA02: b1_gradient,
+   PL.TF3.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = 0.076920669339634
+O_PL: overlay = {PL.CM1.CAV01[PHI0]: phase_deg/360, PL.CM1.CAV02[PHI0]: phase_deg/360,
+   PL.CM2.CAV02[PHI0]: phase_deg/360, PL.CM2.CAV03[PHI0]: phase_deg/360,
+   PL.CM1.CAV03[PHI0]: (phase_deg+phase3_deg)/360, PL.CM2.CAV01[PHI0]: (phase_deg+phase3_deg)/360,
+   PL.CM1.CAV01[VOLTAGE]: (9/8*voltage+delta_voltage3)/4/abs(cos(phase_deg*pi/180)),
+   PL.CM1.CAV02[VOLTAGE]: (9/8*voltage+delta_voltage3)/4/abs(cos(phase_deg*pi/180)),
+   PL.CM2.CAV02[VOLTAGE]: (9/8*voltage+delta_voltage3)/4/abs(cos(phase_deg*pi/180)),
+   PL.CM2.CAV03[VOLTAGE]: (9/8*voltage+delta_voltage3)/4/abs(cos(phase_deg*pi/180)),
+   PL.CM1.CAV03[VOLTAGE]: (1/8*voltage+delta_voltage3)/2/abs(cos(phase_deg*pi/180)),
+   PL.CM2.CAV01[VOLTAGE]: (1/8*voltage+delta_voltage3)/2/abs(cos(phase_deg*pi/180))}, var = {PHASE_DEG,
+   VOLTAGE, PHASE3_DEG, DELTA_VOLTAGE3}, PHASE_DEG = -25.15, VOLTAGE = 7.0015197487654E6, PHASE3_DEG = 180
+O_LA.TF1: overlay = {LA.TF1.QUA01: -b1_gradient*(1+trim), LA.TF1.QUA02: b1_gradient,
+   LA.TF1.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = 0.51134583988771
+O_LA.TF2: overlay = {LA.TF2.QUA01: -b1_gradient*(1+trim), LA.TF2.QUA02: b1_gradient,
+   LA.TF2.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = -0.62708021621772
+O_LA.TF3: overlay = {LA.TF3.QUA01: -b1_gradient*(1+trim), LA.TF3.QUA02: b1_gradient,
+   LA.TF3.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = -0.62708021621772
+O_LA.TF4: overlay = {LA.TF4.QUA01: -b1_gradient*(1+trim), LA.TF4.QUA02: b1_gradient,
+   LA.TF4.QUA03: -b1_gradient*(1+trim)}, var = {B1_GRADIENT, TRIM}, B1_GRADIENT = 0.51134583988771
+O_LA: overlay = {LA.CRMOD01.CAV01[PHI0]: phase_deg/360, LA.CRMOD02.CAV01[PHI0]: phase_deg/360,
+   LA.CRMOD03.CAV01[PHI0]: phase_deg/360, LA.CRMOD04.CAV01[PHI0]: phase_deg/360,
+   LA.CRMOD05.CAV01[PHI0]: (phase_deg+phase3_deg)/360, LA.CRMOD05.CAV02[PHI0]: (phase_deg+phase3_deg)/360,
+   LA.CRMOD06.CAV01[PHI0]: (phase_deg+phase3_deg)/360, LA.CRMOD06.CAV02[PHI0]: (phase_deg+phase3_deg)/360,
+   LA.CRMOD07.CAV01[PHI0]: phase_deg/360, LA.CRMOD08.CAV01[PHI0]: phase_deg/360,
+   LA.CRMOD09.CAV01[PHI0]: phase_deg/360, LA.CRMOD10.CAV01[PHI0]: phase_deg/360,
+   LA.CRMOD01.CAV01[VOLTAGE]: voltage/8, LA.CRMOD02.CAV01[VOLTAGE]: voltage/8,
+   LA.CRMOD03.CAV01[VOLTAGE]: voltage/8, LA.CRMOD04.CAV01[VOLTAGE]: voltage/8,
+   LA.CRMOD05.CAV01[VOLTAGE]: voltage3/4, LA.CRMOD05.CAV02[VOLTAGE]: voltage3/4,
+   LA.CRMOD06.CAV01[VOLTAGE]: voltage3/4, LA.CRMOD06.CAV02[VOLTAGE]: voltage3/4,
+   LA.CRMOD07.CAV01[VOLTAGE]: voltage/8, LA.CRMOD08.CAV01[VOLTAGE]: voltage/8,
+   LA.CRMOD09.CAV01[VOLTAGE]: voltage/8, LA.CRMOD10.CAV01[VOLTAGE]: voltage/8}, var = {PHASE_DEG, VOLTAGE,
+   VOLTAGE3, PHASE3_DEG}, PHASE_DEG = 4.874, VOLTAGE = 4.7619318016896E7, VOLTAGE3 = 5.7514653616128E6,
+   PHASE3_DEG = 180
+O_SYM_TF1: overlay = {O_LA.TF1, O_LA.TF1[TRIM]: TRIM, O_LA.TF4, O_LA.TF4[TRIM]: TRIM},
+   var = {B1_GRADIENT, TRIM}, B1_GRADIENT = 0.51134583988771
+O_SYM_TF2: overlay = {O_LA.TF2, O_LA.TF2[TRIM]: TRIM, O_LA.TF3, O_LA.TF3[TRIM]: TRIM},
+   var = {B1_GRADIENT, TRIM}, B1_GRADIENT = -0.62708021621772
+
+!-------------------------------------------------------
+! Lattice lines
+
+
+LAT: line = ( IN.MAR.BEG, slave_drift_0_2, slave_drift_0_3, slave_drift_0_4, IN.SOL02, IN.PIP01#1,
+   IN.CAV01, IN.PIP01#2, IN.CAV02, IN.PIP01#3, IN.CAV03, IN.PIP01#4, IN.MAR.END, MG.MAR.BEG,
+   slave_drift_0_15, slave_drift_0_16, slave_drift_0_17, MG.SPACER1, slave_drift_0_19, slave_drift_0_20,
+   slave_drift_0_21, MG.SPACER2, MG.MAR.BEGBEND, MG.BEN01, slave_drift_0_25, slave_drift_0_26,
+   slave_drift_0_27, MG.MAR.MID, slave_drift_0_29, slave_drift_0_30, slave_drift_0_31, MG.BEN02,
+   slave_drift_0_33, slave_drift_0_34, slave_drift_0_35, MG.MAR.END, PL.MAR.BEG, PL.CM1.MAR.BEG,
+   PL.CM1.GAT01, PL.CM1.PIP01, PL.CM1.CAV01, PL.CM1.PIP02, PL.CM1.CAV02, PL.CM1.PIP03, PL.CM1.CAV03,
+   PL.CM1.PIP04, PL.CM1.GAT02, PL.CM1.MAR.END, PL.PIP.C2C, PL.CM2.MAR.BEG, PL.CM2.GAT01, PL.CM2.PIP01,
+   PL.CM2.CAV01, PL.CM2.PIP02, PL.CM2.CAV02, PL.CM2.PIP03, PL.CM2.CAV03, PL.CM2.PIP04, PL.CM2.GAT02,
+   PL.CM2.MAR.END, slave_drift_0_61, slave_drift_0_62, slave_drift_0_63, slave_drift_0_64,
+   slave_drift_0_65, slave_drift_0_66, slave_drift_0_67, PL.CM3_DUMMY, PL.CM4_DUMMY, slave_drift_0_70,
+   slave_drift_0_71, slave_drift_0_72, slave_drift_0_73, slave_drift_0_74, slave_drift_0_75,
+   slave_drift_0_76, PL.DUMP_DUMMY, slave_drift_0_78, slave_drift_0_79, slave_drift_0_80, slave_drift_0_81,
+   slave_drift_0_82, slave_drift_0_83, slave_drift_0_84, PL.MAR.END, PX.MAR.BEG, PX.BEN01, PX.MAR.PIP01,
+   PX.PIP01, PX.BEN02, slave_drift_0_91, PX.MAR.MID, slave_drift_0_93, PX.BEN03, PX.PIP03, PX.BEN04,
+   PX.MAR.END, slave_drift_0_98, slave_drift_0_99, slave_drift_0_100, slave_drift_0_101, slave_drift_0_102,
+   slave_drift_0_103, slave_drift_0_104, LA.MAR.BEG, LA.CRMOD01.MAR.BEG, LA.CRMOD01.GAT01,
+   LA.CRMOD01.PIP01, LA.CRMOD01.CAV01, LA.CRMOD01.PIP02, LA.CRMOD01.GAT02, LA.CRMOD01.MAR.END,
+   slave_drift_0_113, slave_drift_0_114, slave_drift_0_115, slave_drift_0_116, slave_drift_0_117,
+   slave_drift_0_118, slave_drift_0_119, LA.CRMOD02.MAR.BEG, LA.CRMOD02.GAT01, LA.CRMOD02.PIP01,
+   LA.CRMOD02.CAV01, LA.CRMOD02.PIP02, LA.CRMOD02.GAT02, LA.CRMOD02.MAR.END, LA.CRMOD03.MAR.BEG,
+   LA.CRMOD03.GAT01, LA.CRMOD03.PIP01, LA.CRMOD03.CAV01, LA.CRMOD03.PIP02, LA.CRMOD03.GAT02,
+   LA.CRMOD03.MAR.END, slave_drift_0_134, slave_drift_0_135, slave_drift_0_136, slave_drift_0_137,
+   slave_drift_0_138, slave_drift_0_139, slave_drift_0_140, LA.CRMOD04.MAR.BEG, LA.CRMOD04.GAT01,
+   LA.CRMOD04.PIP01, LA.CRMOD04.CAV01, LA.CRMOD04.PIP02, LA.CRMOD04.GAT02, LA.CRMOD04.MAR.END, LA.MARH.BEG,
+   LA.CRMOD05.MAR.BEG, LA.CRMOD05.GAT01, LA.CRMOD05.PIP01, LA.CRMOD05.CAV01, LA.CRMOD05.PIP02,
+   LA.CRMOD05.CAV02, LA.CRMOD05.PIP03, LA.CRMOD05.GAT02, LA.CRMOD05.MAR.END, LA.CRMOD06.MAR.BEG,
+   LA.CRMOD06.GAT01, LA.CRMOD06.PIP01, LA.CRMOD06.CAV01, LA.CRMOD06.PIP02, LA.CRMOD06.CAV02,
+   LA.CRMOD06.PIP03, LA.CRMOD06.GAT02, LA.CRMOD06.MAR.END, LA.MARH.END, LA.CRMOD07.MAR.BEG, LA.MAR.MID,
+   LA.CRMOD07.GAT01, LA.CRMOD07.PIP01, LA.CRMOD07.CAV01, LA.CRMOD07.PIP02, LA.CRMOD07.GAT02,
+   LA.CRMOD07.MAR.END, slave_drift_0_176, slave_drift_0_177, slave_drift_0_178, slave_drift_0_179,
+   slave_drift_0_180, slave_drift_0_181, slave_drift_0_182, LA.CRMOD08.MAR.BEG, LA.CRMOD08.GAT01,
+   LA.CRMOD08.PIP01, LA.CRMOD08.CAV01, LA.CRMOD08.PIP02, LA.CRMOD08.GAT02, LA.CRMOD08.MAR.END,
+   LA.CRMOD09.MAR.BEG, LA.CRMOD09.GAT01, LA.CRMOD09.PIP01, LA.CRMOD09.CAV01, LA.CRMOD09.PIP02,
+   LA.CRMOD09.GAT02, LA.CRMOD09.MAR.END, slave_drift_0_197, slave_drift_0_198, slave_drift_0_199,
+   slave_drift_0_200, slave_drift_0_201, slave_drift_0_202, slave_drift_0_203, LA.CRMOD10.MAR.BEG,
+   LA.CRMOD10.GAT01, LA.CRMOD10.PIP01, LA.CRMOD10.CAV01, LA.CRMOD10.PIP02, LA.CRMOD10.GAT02,
+   LA.CRMOD10.MAR.END, LA.MAR.END)
+
+use, LAT
